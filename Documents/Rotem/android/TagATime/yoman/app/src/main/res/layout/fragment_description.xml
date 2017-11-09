@@ -1,0 +1,338 @@
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:windowSoftInputMode = "stateAlwaysHidden"
+    android:id="@+id/descriptionContainer"
+    android:background="#37474f"
+
+    tools:context="il.co.yoman.yoman.Account.webViewFrag">
+
+    <!--טקסט קצה שמאל תורים עתידיים שמאל -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "23%"
+        app:layout_marginTopPercent= "1%"
+        app:layout_marginStartPercent="2%"
+        >
+
+        <TextView
+            android:id="@+id/countAccount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#ffffff" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--טקסט כותרת קצה ימין-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "23%"
+        app:layout_marginTopPercent= "2%"
+        app:layout_marginStartPercent="75%"
+        android:id="@+id/percentRelativeLayout3">
+
+        <TextView
+            android:id="@+id/titleAccount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="TextView"
+            android:textAlignment="gravity"
+            android:textColor="#ffffff" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--תפריט - פגישות - web-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "33%"
+        app:layout_marginTopPercent= "8%"
+        app:layout_marginStartPercent="67%"
+        >
+        <TextView
+            android:id="@+id/webViewTag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="הזמן תור"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#9b9b9b" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--futureEvents-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "34%"
+        app:layout_marginTopPercent= "8%"
+        app:layout_marginStartPercent="33%"
+        >
+        <TextView
+            android:id="@+id/futureEvents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="הפגישות שלי"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#9b9b9b" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--businessDescription -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "33%"
+        app:layout_marginTopPercent= "8%"
+        app:layout_marginStartPercent="0%"
+        >
+        <TextView
+            android:id="@+id/businessDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="פרטי עסק"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#9b9b9b" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--תפריט - Line - businessDescription-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "0.6%"
+        app:layout_widthPercent= "33%"
+        app:layout_marginTopPercent= "14.5%"
+        app:layout_marginStartPercent="0%"
+        >
+        <TextView
+            android:id="@+id/bottom_line"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            />
+        </android.support.percent.PercentRelativeLayout>
+
+    <!--the page-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#f4f4f4"
+        android:backgroundTint="#f4f4f4"
+        app:layout_heightPercent="100%"
+        app:layout_marginTopPercent="15%"
+        app:layout_widthPercent="100%">
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--white box-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "45%"
+
+        app:layout_widthPercent= "100%"
+        app:layout_marginTopPercent= "15%"
+        android:id="@+id/percentRelativeLayout2">
+        <TextView
+        android:id="@+id/whiteBox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start"
+        android:background="@drawable/whitebox"
+        />
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--name of business-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        app:layout_heightPercent= "7%"
+        app:layout_widthPercent= "50%"
+        app:layout_marginTopPercent= "17%"
+        app:layout_marginEndPercent="4%"
+        android:layout_alignParentRight="true">
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="9pt"
+            android:gravity="end"
+            android:text="Asia Medical"
+            android:textColor="#9b9b9b" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--description-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        app:layout_heightPercent= "15%"
+        app:layout_widthPercent= "90%"
+        app:layout_marginTopPercent= "25%"
+        app:layout_marginEndPercent="4%"
+        android:layout_alignParentRight="true">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="8pt"
+            android:gravity="end"
+            android:text="Andy Irons - One on One Training base jumping extreme fit workoutl"
+            android:textColor="#4a4a4a" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--phone number-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        app:layout_heightPercent= "5%"
+        app:layout_widthPercent= "45%"
+        app:layout_marginTopPercent= "40%"
+        app:layout_marginEndPercent="10%"
+        >
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="7pt"
+            android:gravity="end"
+            android:text="phone number"
+            android:textColor="#9e9e9e" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--phone pic -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        app:layout_heightPercent= "4%"
+        app:layout_widthPercent= "4%"
+        app:layout_marginTopPercent= "39.7%"
+        app:layout_marginEndPercent="4%"
+        >
+        <ImageView
+            android:id="@+id/picphone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_local_phone_black_24dp"
+            />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--email adress-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        app:layout_heightPercent= "5%"
+        app:layout_widthPercent= "25%"
+        app:layout_marginTopPercent= "46%"
+        app:layout_marginEndPercent="10%"
+        >
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="7pt"
+            android:gravity="end"
+            android:text="emailAdress"
+            android:textColor="#9e9e9e" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--email pic -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        app:layout_heightPercent= "4%"
+        app:layout_widthPercent= "4%"
+        app:layout_marginTopPercent= "45.7%"
+        app:layout_marginEndPercent="4%"
+        >
+        <ImageView
+            android:id="@+id/picemail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_email_black_24dp"
+            />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--adress-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        app:layout_heightPercent= "5%"
+        app:layout_widthPercent= "32%"
+        app:layout_marginTopPercent= "52%"
+        app:layout_marginEndPercent="10%"
+        >
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="7pt"
+            android:gravity="end"
+            android:text="adress"
+            android:textColor="#9e9e9e" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--adress pic -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "4%"
+        app:layout_widthPercent= "4.5%"
+        app:layout_marginTopPercent= "51.7%"
+        app:layout_marginEndPercent="4%"
+        android:layout_alignParentRight="true">
+        <ImageView
+            android:id="@+id/picStatus"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_home_black_24dp"
+            />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!-- map -->
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/mapForFrag"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="40%"
+        app:layout_marginStartPercent="0%"
+        app:layout_marginTopPercent="60%"
+        app:layout_widthPercent="100%">
+
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+</android.support.percent.PercentRelativeLayout>

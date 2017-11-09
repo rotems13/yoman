@@ -1,0 +1,169 @@
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/futureContainer"
+    android:layoutDirection="ltr"
+    android:windowSoftInputMode = "stateAlwaysHidden"
+    android:background="#37474f"
+    tools:context="il.co.yoman.yoman.Account.webViewFrag">
+
+    <!--טקסט קצה שמאל תורים עתידיים שמאל -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "23%"
+        app:layout_marginTopPercent= "1%"
+        app:layout_marginStartPercent="2%"
+        >
+
+        <TextView
+            android:id="@+id/countAccount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#ffffff" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--טקסט כותרת קצה ימין    -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "23%"
+        app:layout_marginTopPercent= "2%"
+        app:layout_marginStartPercent="75%"
+        >
+
+        <TextView
+            android:id="@+id/titleAccount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="TextView"
+            android:textAlignment="gravity"
+            android:textColor="#ffffff" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--תפריט - פגישות - webViewTag-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "33%"
+        app:layout_marginTopPercent= "8%"
+        app:layout_marginStartPercent="67%"
+        >
+        <TextView
+            android:id="@+id/webViewTag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="הזמן תור"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#9b9b9b" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--futureEvents-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "34%"
+        app:layout_marginTopPercent= "8%"
+        app:layout_marginStartPercent="33%"
+        >
+        <TextView
+            android:id="@+id/futureEvents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="הפגישות שלי"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#9b9b9b" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--תפריט - Line futureEvents-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "0.6%"
+        app:layout_widthPercent= "34%"
+        app:layout_marginTopPercent= "14.5%"
+        app:layout_marginStartPercent="33%"
+        >
+        <TextView
+            android:id="@+id/bottom_line"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--businessDescription -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "33%"
+        app:layout_marginTopPercent= "8%"
+        app:layout_marginStartPercent="0%"
+        >
+        <TextView
+            android:id="@+id/businessDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="פרטי עסק"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#9b9b9b" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+    <!-- recycle View -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "100%"
+        app:layout_widthPercent= "100%"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvEvents"
+            android:background="#f4f4f4"
+            app:layout_marginTopPercent= "15%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </android.support.percent.PercentRelativeLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "25%"
+        app:layout_widthPercent= "25%"
+        app:layout_marginEndPercent= "38.5%"
+        app:layout_marginTopPercent= "37.5%"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#37474f"
+            />
+    </android.support.percent.PercentRelativeLayout>
+
+
+    </android.support.percent.PercentRelativeLayout>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/containerLogin"
+    android:inputType="number"
+    android:layoutDirection="ltr"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--logo-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "11.5%"
+        app:layout_widthPercent= "73.8%"
+        app:layout_marginTopPercent= "4.4%"
+        app:layout_marginStartPercent="13%"
+        >
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/yomanlogoblack"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </android.support.percent.PercentRelativeLayout>
+
+
+    <!--logo text-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "4%"
+        app:layout_widthPercent= "57%"
+        app:layout_marginTopPercent= "17.5%"
+        app:layout_marginStartPercent="26.5%"
+        >
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Manage Time and schedule easy"
+            android:textSize="12sp"
+            android:textColor="#9b9b9b"
+            />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+    <!--botoom grey-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#f5f5f5"
+        app:layout_heightPercent="100%"
+        app:layout_marginTopPercent="24.5%"
+        app:layout_widthPercent="100%">
+
+        <!--Mobile text-->
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentEnd="true"
+            app:layout_heightPercent="6%"
+            app:layout_marginEndPercent="15.5%"
+            app:layout_marginTopPercent="7.2%"
+            app:layout_widthPercent="34.67%"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/countAccount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="מספר טלפון"
+                android:textColor="#9b9b9b"
+                android:textSize="18sp" />
+        </android.support.percent.PercentRelativeLayout>
+
+
+        <!--Edit text Mobile-->
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="11%"
+            app:layout_marginStartPercent="13.2%"
+            app:layout_marginTopPercent="11.8%"
+            app:layout_widthPercent="72.6%">
+
+            <EditText
+                android:id="@+id/edPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#37474f"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textColor="#37474f"
+                android:textSize="22sp" />
+        </android.support.percent.PercentRelativeLayout>
+
+        <!--Sign in Button-->
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="14.5%"
+            app:layout_marginStartPercent="13.2%"
+            app:layout_marginTopPercent="26%"
+            app:layout_widthPercent="72.6%">
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="#37474f"
+                android:text="SIGN IN"
+                android:textColor="#ffffff"
+                android:textSize="21sp" />
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="11%"
+            app:layout_marginStartPercent="40%"
+            app:layout_marginTopPercent="90%"
+            app:layout_widthPercent="25%">
+
+            <TextView
+                android:id="@+id/contact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Contact Us"
+                android:textColor="#9b9b9b"
+                android:textSize="16sp" />
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="20%"
+            app:layout_marginStartPercent="40%"
+            app:layout_marginTopPercent="50%"
+            app:layout_widthPercent="20%">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:indeterminateTint="#37474f" />
+        </android.support.percent.PercentRelativeLayout>
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+
+
+
+
+</android.support.percent.PercentRelativeLayout>

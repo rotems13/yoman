@@ -1,0 +1,99 @@
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_heightPercent="100%"
+    app:layout_widthPercent="100%"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:windowSoftInputMode = "stateAlwaysHidden"
+
+    android:background="#ffffff"
+
+    android:id="@+id/accCotnainer"
+    tools:context="il.co.yoman.yoman.accountsFrag">
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "100%"
+        app:layout_widthPercent= "100%"
+        >
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvAccounts"
+        app:layout_marginBottomPercent= "9%"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    </android.support.percent.PercentRelativeLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "25%"
+        app:layout_widthPercent= "25%"
+        android:layout_alignParentRight="true"
+        app:layout_marginEndPercent= "38.5%"
+        app:layout_marginTopPercent= "32.5%"
+        >
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    </android.support.percent.PercentRelativeLayout>
+
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "9%"
+        app:layout_widthPercent= "45%"
+        app:layout_marginEndPercent= "2%"
+        app:layout_marginTopPercent= "91%"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        >
+
+        <Button
+            android:id="@+id/btnNew"
+            android:background="@drawable/mybutton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="הזמן תור חדש"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </android.support.percent.PercentRelativeLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "9%"
+        app:layout_widthPercent= "45%"
+        app:layout_marginEndPercent= "75%"
+        app:layout_marginTopPercent= "91%"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+
+        <Button
+            android:id="@+id/btnNewLogOut"
+            android:background="@drawable/mybutton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="צא"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    </android.support.percent.PercentRelativeLayout>
+
+
+
+</android.support.percent.PercentRelativeLayout>
