@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "671153921364",
+    "firebase_url": "https://yoman-94d1d.firebaseio.com",
+    "project_id": "yoman-94d1d",
+    "storage_bucket": "yoman-94d1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671153921364:android:bce1b94a0b89d7fd",
+        "android_client_info": {
+          "package_name": "il.co.yoman.yoman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671153921364-nlbhf5lah8kq8i2htl0l4ugr2844fs35.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "il.co.yoman.yoman",
+            "certificate_hash": "1f7263ee55cb26d954c5d8a533c081a783426b02"
+          }
+        },
+        {
+          "client_id": "671153921364-e7bve7371e47f1opsp11qj7ma63p0ipg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3upa2X1_SDjk2BrNwLQvhH1W2r_nT4yQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671153921364-e7bve7371e47f1opsp11qj7ma63p0ipg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
