@@ -1,6 +1,5 @@
 package il.co.yoman.yoman.Account;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -19,9 +18,11 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import il.co.yoman.yoman.R;
-import il.co.yoman.yoman.loginActivity;
+import il.co.yoman.yoman.accountsFrag;
 
 import static il.co.yoman.yoman.services.NetworkStateReceiver.isOnlineReciver;
+import static il.co.yoman.yoman.welcomeScreen.getMobileNumber;
+import static il.co.yoman.yoman.welcomeScreen.getToken;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,10 +30,8 @@ import static il.co.yoman.yoman.services.NetworkStateReceiver.isOnlineReciver;
 public class webViewFrag extends Fragment {
     private WebView          webView;
     private TextView         title, count, meetingsTag, bottom_Line, futureEvents, descriptionFrag;
-    private String           link, strTitle, strFuture, token, mobileNumber, nick;
+    private String           link, strTitle, strFuture, nick, token,mobileNumber;
     public  webViewFrag      newInstance(String link, String title, String description, String future, String nick ) {
-        mobileNumber     =    this.getArguments().getString("mobileNumber");
-        token            =    this.getArguments().getString("token");
 
         Bundle args = new Bundle();
         args.putString("link", link);
@@ -40,8 +39,6 @@ public class webViewFrag extends Fragment {
         args.putString("description", description);
         args.putString("future", future);
         args.putString("nick", nick);
-        args.putString("mobileNumber", mobileNumber);
-        args.putString("token", token);
 
         webViewFrag fragment = new webViewFrag();
         fragment.setArguments(args);
@@ -58,9 +55,9 @@ public class webViewFrag extends Fragment {
         link             =        getArguments().getString("link");
         strTitle         =        this.getArguments().getString("title");
         strFuture        =        this.getArguments().getString("future");
-        mobileNumber     =        this.getArguments().getString("mobileNumber");
-        token            =        this.getArguments().getString("token");
         nick             =        this.getArguments().getString("nick");
+        mobileNumber     =        getMobileNumber();
+        token            =        getToken();
 
         View v           =        inflater.inflate(R.layout.fragment_web_view, container, false);
         webView          =        v.findViewById(R.id.webView);
@@ -75,6 +72,8 @@ public class webViewFrag extends Fragment {
         meetingsTag.setTextColor(Color.WHITE);
         bottom_Line.setBackground( getResources().getDrawable(R.drawable.shadow) );
         count.setText("מס׳ אירועים: " + strFuture);
+        futureEvents.setText("הפגישות שלי " + "(" + strFuture +")");
+
 
         webView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -122,14 +121,12 @@ public class webViewFrag extends Fragment {
 //                webView.animate().rotation(0);
 //                webView.setBackgroundColor(0xfff);
             }
-
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
               //  webView.animate().rotation(360);
                 super.onPageStarted(view, url, favicon);
 //                webView.setBackgroundColor(0x0f0);
             }
-
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -149,8 +146,11 @@ public class webViewFrag extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     // handle back button's click listener
-                    Intent intent = new Intent(getActivity(), loginActivity.class);
-                    startActivity(intent);
+                    getFragmentManager().
+                            beginTransaction().
+                            replace(R.id.webContainer, new accountsFrag()).
+                            commit();
+
                     return true;
                 }
                 return false;
@@ -161,11 +161,13 @@ public class webViewFrag extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString("title",strTitle);
         bundle.putString("link",link);
-        bundle.putString("token", token);
+        bundle.putString("token", getToken());
         bundle.putString("nick", nick);
         bundle.putString("future", strFuture);
-
+        bundle.putString("token", token);
         bundle.putString("mobileNumber", mobileNumber);
+
+        bundle.putString("mobileNumber", getMobileNumber());
 
         futureEvents fragInfo = new futureEvents();
         fragInfo.setArguments(bundle);

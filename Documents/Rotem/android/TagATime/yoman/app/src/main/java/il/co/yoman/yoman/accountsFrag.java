@@ -2,11 +2,13 @@ package il.co.yoman.yoman;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -14,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,6 +24,9 @@ import java.util.List;
 import il.co.yoman.yoman.Account.webViewFrag;
 import il.co.yoman.yoman.DataSource.AccountDataSource;
 
+import static il.co.yoman.yoman.welcomeScreen.getToken;
+import static il.co.yoman.yoman.welcomeScreen.token;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,38 +34,49 @@ import il.co.yoman.yoman.DataSource.AccountDataSource;
 public class accountsFrag extends Fragment implements AccountDataSource.OnAccountArrivedListener{
     private RecyclerView             accounts;
     private ProgressBar              progressBar;
-    private String                   verifyToken, mobileNumber;
+    private TextView                 logout, manager, conatct, noneEvents ;
     private SharedPreferences        prefs ;
-    private Button                   logout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (container != null) {
-            container.removeAllViews();
-        }
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
         View v          =    inflater.inflate(R.layout.fragment_accounts, container, false);
-        verifyToken     =    this.getArguments().getString("token");
-        mobileNumber    =    this.getArguments().getString("mobileNumber");
-        logout          =    v.findViewById(R.id.btnNewLogOut);
         accounts        =    v.findViewById(R.id.rvAccounts);
         progressBar     =    v.findViewById(R.id.progressBar);
+        logout          =    v.findViewById(R.id.logout);
+        manager         =    v.findViewById(R.id.newManager);
+        conatct         =    v.findViewById(R.id.contact);
+        noneEvents      =    v.findViewById(R.id.noneEvents);
 
-        AccountDataSource.getAccounts(this, verifyToken);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logOut();
             }
         });
+        conatct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        manager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        AccountDataSource.getAccounts(this, getToken());
         return v;
     }
     @Override
     public void onAccountsArrived(List<AccountDataSource.Account> businessAccount) {
         progressBar.setVisibility(View.GONE);
-        if (businessAccount != null) {
+        if (businessAccount.isEmpty())
+            noneEvents.setVisibility(View.VISIBLE);
+        else if (businessAccount != null) {
             //1)rv.setLayoutManager
             accounts.setLayoutManager(new LinearLayoutManager(getActivity()));
             //2)rv.setAdapter
@@ -71,7 +86,6 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
             logOut();
             Intent intent = new Intent(getActivity(),loginActivity.class);
             startActivity(intent);
-
         }
     }
     class accountsAdapter extends RecyclerView.Adapter<accountsAdapter.AccountsViewHolder> {
@@ -89,7 +103,7 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
 
         @Override
         public AccountsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = inflater.inflate(R.layout.zaccount_item, parent, false);
+            View v = inflater.inflate(R.layout.zaccountitem, parent, false);
             return new AccountsViewHolder(v);
         }
 
@@ -107,11 +121,10 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
             return data.size();
         }
 
-        class AccountsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {//} implements View.OnClickListener {
+        class AccountsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             TextView tvTitle;
             TextView tvDescription;
             TextView tvCount;
-            Button ivThumbnail;
 
             public AccountsViewHolder(View itemView) {
                 super(itemView);
@@ -119,9 +132,8 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
                 tvTitle = itemView.findViewById(R.id.tvTitle);
                 tvDescription = itemView.findViewById(R.id.tvDescription);
                 tvCount = itemView.findViewById(R.id.tvFuture);
-                ivThumbnail = itemView.findViewById(R.id.ivThumbnail);
 
-                ivThumbnail.setOnClickListener(this);
+                itemView.setOnClickListener(this);
             }
 
             @Override
@@ -141,9 +153,8 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
                     bundle.putString("title",title);
                     bundle.putString("description", description);
                     bundle.putString("future", future);
-                    bundle.putString("mobileNumber",mobileNumber);
                     bundle.putString("nick",nick);
-                    bundle.putString("token",verifyToken);
+                    bundle.putString("token",token);
                     webViewFrag fragInfo = new webViewFrag();
                     fragInfo.setArguments(bundle);
 
@@ -181,15 +192,33 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
 
     }
     private void logOut() {
-        prefs = this.getActivity().getSharedPreferences("pref", 0);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.remove("verifyToken");
-        editor.remove("mobileNumber");
-        editor.clear();
-        editor.commit();
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setCancelable(false);
+        dialog.setTitle("יציאה");
+        dialog.setMessage("הנך מבצע התנתקות, האם הינך בטוח?");
+        dialog.setPositiveButton("אישור", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                prefs = getActivity().getSharedPreferences("pref", 0);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.remove("verifyToken");
+                editor.remove("mobileNumber");
+                editor.clear();
+                editor.commit();
 
-        Intent intent = new Intent(this.getActivity(), loginActivity.class);
-        startActivity(intent);
+                Intent intent = new Intent(getActivity(), loginActivity.class);
+                startActivity(intent);
+            }
+        }).setNegativeButton("בטל", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        })
+                .create();
+        final AlertDialog alert = dialog.create();
+        alert.show();
+
     }
 }
 

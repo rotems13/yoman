@@ -45,7 +45,6 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
 
     }
-
     public static void makeToast(String text,int durationInSecond, Context context){
         final Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         Spannable centeredText = new SpannableString(text);

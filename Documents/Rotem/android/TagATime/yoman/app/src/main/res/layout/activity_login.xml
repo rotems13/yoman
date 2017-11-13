@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/containerLogin"
+    android:layoutDirection="rtl"
     android:inputType="number"
-    android:layoutDirection="ltr"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -27,31 +27,29 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
     </android.support.percent.PercentRelativeLayout>
-
-
     <!--logo text-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_heightPercent= "4%"
-        app:layout_widthPercent= "57%"
+        app:layout_widthPercent= "73.8%"
         app:layout_marginTopPercent= "17.5%"
-        app:layout_marginStartPercent="26.5%"
+        app:layout_marginStartPercent="13%"
         >
 
         <TextView
             android:id="@+id/textView0"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Manage Time and schedule easy"
-            android:textSize="12sp"
+            android:text="יומן - זימון תורים "
+            android:gravity="center"
+            android:textSize="17sp"
             android:textColor="#9b9b9b"
             />
 
     </android.support.percent.PercentRelativeLayout>
 
-
-    <!--botoom grey-->
+    <!--botoom grey box-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -62,17 +60,15 @@
         app:layout_heightPercent="100%"
         app:layout_marginTopPercent="24.5%"
         app:layout_widthPercent="100%">
-
         <!--Mobile text-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_alignParentEnd="true"
             app:layout_heightPercent="6%"
-            app:layout_marginEndPercent="15.5%"
-            app:layout_marginTopPercent="7.2%"
+            app:layout_marginStartPercent="5%"
+            app:layout_marginTopPercent="3.2%"
             app:layout_widthPercent="34.67%"
-            android:layout_alignParentRight="true">
+            >
 
             <TextView
                 android:id="@+id/countAccount"
@@ -82,67 +78,65 @@
                 android:textColor="#9b9b9b"
                 android:textSize="18sp" />
         </android.support.percent.PercentRelativeLayout>
-
-
         <!--Edit text Mobile-->
-
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="11%"
-            app:layout_marginStartPercent="13.2%"
-            app:layout_marginTopPercent="11.8%"
-            app:layout_widthPercent="72.6%">
-
+            app:layout_widthPercent="90%"
+            app:layout_marginStartPercent="5%"
+            app:layout_marginTopPercent="7.8%"
+            >
             <EditText
                 android:id="@+id/edPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="#37474f"
                 android:inputType="number"
+                android:gravity="left"
                 android:maxLength="10"
                 android:maxLines="1"
                 android:textColor="#37474f"
                 android:textSize="22sp" />
         </android.support.percent.PercentRelativeLayout>
-
         <!--Sign in Button-->
-
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="14.5%"
-            app:layout_marginStartPercent="13.2%"
-            app:layout_marginTopPercent="26%"
-            app:layout_widthPercent="72.6%">
+            app:layout_widthPercent="90%"
+            app:layout_marginStartPercent="5%"
+            app:layout_marginTopPercent="24%"
+            >
 
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="#37474f"
-                android:text="SIGN IN"
+                android:background="@drawable/whitebox"
+                android:text="התחבר"
                 android:textColor="#ffffff"
                 android:textSize="21sp" />
         </android.support.percent.PercentRelativeLayout>
-
+        <!--contact-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="11%"
-            app:layout_marginStartPercent="40%"
-            app:layout_marginTopPercent="90%"
-            app:layout_widthPercent="25%">
-
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="72.6%"
+            app:layout_marginStartPercent="13.2%"
+            app:layout_marginTopPercent="38%"
+            >
             <TextView
                 android:id="@+id/contact"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Contact Us"
+                android:text="צור קשר"
+                android:gravity="center"
                 android:textColor="#9b9b9b"
                 android:textSize="16sp" />
         </android.support.percent.PercentRelativeLayout>
-
+        <!--progress bar-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"

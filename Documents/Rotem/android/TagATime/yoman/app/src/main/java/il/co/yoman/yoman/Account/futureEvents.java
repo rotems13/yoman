@@ -7,12 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import java.util.List;
 
 import il.co.yoman.yoman.DataSource.FutureDataSource;
 import il.co.yoman.yoman.R;
+import il.co.yoman.yoman.accountsFrag;
 
 
 /**
@@ -27,7 +29,7 @@ import il.co.yoman.yoman.R;
  */
 public class futureEvents extends Fragment  implements FutureDataSource.OnFutureArrivedListener {
 
-    private TextView         title, count, meetingsTag, futureEvents, bottom_line, descriptionFrag;
+    private TextView         title, count, meetingsTag, futureEvents, bottom_line, descriptionFrag, noneEvents;
     private String           link, strTitle, strFuture, description, token,mobileNumber, nick;
     private ProgressBar      progressBar;
     private RecyclerView     rvEvents;
@@ -55,14 +57,16 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
         descriptionFrag  =        v.findViewById(R.id.businessDescription);
         meetingsTag      =        v.findViewById(R.id.webViewTag);
         rvEvents         =        v.findViewById(R.id.rvEvents);
+        noneEvents       =        v.findViewById(R.id.noneEvents);
 
         bottom_line.setBackground(getResources().getDrawable(R.drawable.shadow));
         futureEvents.setTextColor(Color.WHITE);
         title.setText(strTitle);
         count.setText("מס׳ אירועים: " + strFuture);
+        futureEvents.setText("הפגישות שלי " + "(" + strFuture +")");
+
 
         FutureDataSource.getEvents(this, nick, mobileNumber , token);
-
         meetingsTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,16 +124,15 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
     @Override
     public void OnFutureArrivedListener(List<FutureDataSource.FutureEvent> EventsFuture) {
         progressBar.setVisibility(View.GONE);
-        if (EventsFuture != null) {
+        if (EventsFuture.isEmpty())
+            noneEvents.setVisibility(View.VISIBLE);
+        else if (EventsFuture != null) {
             //1)rv.setLayoutManager
             rvEvents.setLayoutManager(new LinearLayoutManager(getActivity()));
             //2)rv.setAdapter
             rvEvents.setAdapter(new futureEventsAdapter(getActivity(), EventsFuture));
         }
-//        else if (EventsFuture == 0) {
-//         makeToast("לא קיימים אירועים קרובים", 10 , getActivity());
-//
-//        }
+
     }
 
 
@@ -177,76 +180,93 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
         @Override
         public void onBindViewHolder(FutureViewHolder holder, int position) {
             FutureDataSource.FutureEvent event = data.get(position);
-            holder.tvTitle.setText(event.getTitle());
+            holder.tvTitle.setText(event.getServices());
             holder.tvStartTime.setText(event.getStartTime());
-//            holder.tvEndTime.setText(event.getEndTime());
-            holder.tvCreator.setText(event.getNameOfCreate() );
+            holder.tvStartTime.setTextColor(Color.parseColor(event.geteColor()));
+            holder.line.setBackgroundColor(Color.parseColor(event.geteColor()));
             holder.Date.setText(event.getDate() );
+            holder.tvStatus.setText(event.getStatus());
+            holder.create.setText(event.getResource());
+            holder.picStatus.setBackgroundColor(Color.parseColor(event.geteStatusColor()));
          //   holder.picStatus.setText(event.getStartTime() + " תורים עתידיים");
            // holder.picTitle.setImageIcon(event.getStartTime() + " תורים עתידיים");
 
         }
-
-
         @Override
         public int getItemCount() {
             return data.size();
         }
 
-        class FutureViewHolder extends RecyclerView.ViewHolder {//implements View.OnClickListener {//} implements View.OnClickListener {
+        class FutureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {//} implements View.OnClickListener {
 
-         //   Button ivThumbnail;
 
-            TextView tvStartTime, tvEndTime, tvCreator, tvTitle, tvStatus, picStatus, Date;
-            ImageView picTitle;
+            TextView tvStartTime, tvTitle, tvStatus, picStatus, Date, line, create;
 
             public FutureViewHolder(View itemView) {
                 super(itemView);
 
                 tvTitle = itemView.findViewById(R.id.title);
                 tvStartTime = itemView.findViewById(R.id.startTime);
-//                tvEndTime = itemView.findViewById(R.id.FinishTime);
-                tvCreator = itemView.findViewById(R.id.create);
                 tvStatus = itemView.findViewById(R.id.status);
                 picStatus = itemView.findViewById(R.id.picStatus);
-                picTitle = itemView.findViewById(R.id.picTitle);
                 Date = itemView.findViewById(R.id.dateholder);
-
-
-
-                //  ivThumbnail = itemView.findViewById(R.id.ivThumbnail);
-
-//                ivThumbnail.setOnClickListener(this);
+                line = itemView.findViewById(R.id.verticalLine);
+                create = itemView.findViewById(R.id.create);
+                itemView.setOnClickListener(this);
             }
-//
-//            @Override
-//            public void onClick(View view) {
-//                int position = getAdapterPosition();
-//                String link = data.get(position).getSiteURL();
-//                String title = data.get(position).getTitle();
-//                String description = data.get(position).getDescription();
-//                String future = data.get(position).getFutureEvents();
-//
-//
-//                if (context instanceof FragmentActivity) {
-//                    FragmentActivity activity = (FragmentActivity) context;
-//
-//                    Bundle bundle = new Bundle();
+
+            @Override
+            public void onClick(View view) {
+                int position = getAdapterPosition();
+                String link = data.get(position).getUrl();
+                String title = data.get(position).getResource();
+                String description = data.get(position).getServices();
+                String future = "100";//data.get(position).getFutureEvents();
+
+
+                if (context instanceof FragmentActivity) {
+                    FragmentActivity activity = (FragmentActivity) context;
+
+                    Bundle bundle = new Bundle();
 //                    bundle.putString("title", title);
-//                    bundle.putString("description", description);
-//                    bundle.putString("future", future);
-//                    webViewFrag fragInfo = new webViewFrag();
-//                    fragInfo.setArguments(bundle);
-//
-//
-//                    activity.getSupportFragmentManager().
-//                            beginTransaction().
-//                            replace(R.id.accCotnainer, fragInfo.newInstance(link, title, description, future)).
-//                            commit();
-//                }
-//            }
+                    bundle.putString("description", description);
+                    bundle.putString("future", future);
+                    webViewFrag fragInfo = new webViewFrag();
+                    fragInfo.setArguments(bundle);
+
+
+                    activity.getSupportFragmentManager().
+                            beginTransaction().
+                            replace(R.id.accCotnainer, fragInfo.newInstance(link, title, description, future, "")).
+                            commit();
+                }
+            }
+
         }
 
+
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    // handle back button's click listener
+                    getFragmentManager().
+                            beginTransaction().
+                            replace(R.id.futureContainer, new accountsFrag()).
+                            commit();
+
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }
 

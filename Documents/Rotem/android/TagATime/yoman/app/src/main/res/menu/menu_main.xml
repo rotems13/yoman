@@ -3,8 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="il.co.yoman.yoman.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/AccountsMenu"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="חשבונות"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/signAsManagerMenu"
+        android:orderInCategory="200"
+        android:title="הירשם כבעל עסק"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/contactusMenu"
+        android:orderInCategory="300"
+        android:title="צור קשר "
         app:showAsAction="never" />
 </menu>

@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 import il.co.yoman.yoman.R;
+import il.co.yoman.yoman.accountsFrag;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class description extends Fragment implements OnMapReadyCallback {
-
+public class description extends Fragment implements OnMapReadyCallback  {
     private TextView     title, count, meetingsTag, futureEvents, descriptionFrag, bottom_line;
     private String       link, strTitle, strFuture, description, mobileNumber, nick, token;
 
@@ -42,8 +43,9 @@ public class description extends Fragment implements OnMapReadyCallback {
         strTitle = this.getArguments().getString("title");
         strFuture = this.getArguments().getString("future");
         mobileNumber = this.getArguments().getString("mobileNumber");
-        nick = this.getArguments().getString("nick");
         token = this.getArguments().getString("token");
+        nick = this.getArguments().getString("nick");
+
 
         View v           =        inflater.inflate(R.layout.fragment_description, container, false);
         title            =        v.findViewById(R.id.titleAccount);
@@ -56,6 +58,7 @@ public class description extends Fragment implements OnMapReadyCallback {
         title.setText(strTitle);
         bottom_line.setBackground(getResources().getDrawable(R.drawable.shadow));
         descriptionFrag.setTextColor(Color.WHITE);
+        futureEvents.setText("הפגישות שלי " + "(" + strFuture +")");
 
         count.setText("מס׳ אירועים: " + strFuture);
         futureEvents.setOnClickListener(new View.OnClickListener() {
@@ -76,13 +79,13 @@ public class description extends Fragment implements OnMapReadyCallback {
 
         SupportMapFragment mapFragment = new SupportMapFragment();
 
-        getFragmentManager().
-                beginTransaction().
-                replace(R.id.mapForFrag, mapFragment).
-                commit();
 
-        mapFragment.getMapAsync(this);
+            getFragmentManager().
+                    beginTransaction().
+                    replace(R.id.mapForFrag, mapFragment).
+                    commit();
 
+            mapFragment.getMapAsync(this);
 
         return v;
     }
@@ -128,12 +131,13 @@ public class description extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng address = getLocationFromAddress(getContext(), "hamelaha 15 natanya");
+            LatLng address = getLocationFromAddress(getContext(), "hamelaha 15 natanya");
+            googleMap.addMarker(new MarkerOptions().position(address).title("Tag a Time"));
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(address, 15));
 
-        googleMap.addMarker(new MarkerOptions().position(address).title("Marker in Sydney"));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(address, 15));
+}
 
-    }
+        //TODO : get the lat lonng in the datasource of description and push it to the map with description.get()
     public LatLng getLocationFromAddress(Context context, String strAddress)
     {
         Geocoder coder= new Geocoder(context);
@@ -159,6 +163,27 @@ public class description extends Fragment implements OnMapReadyCallback {
         }
         return p1;
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    // handle back button's click listener
+                    getFragmentManager().
+                            beginTransaction().
+                            replace(R.id.descriptionContainer, new accountsFrag()).
+                            commit();
+
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
 

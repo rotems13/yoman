@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:visibility="invisible"
             android:text="TextView"
             android:textColor="#ffffff" />
 
@@ -128,8 +129,6 @@
             android:textColor="#9b9b9b" />
 
     </android.support.percent.PercentRelativeLayout>
-
-
     <!-- recycle View -->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
@@ -163,6 +162,29 @@
             android:layout_height="match_parent"
             android:backgroundTint="#37474f"
             />
+    </android.support.percent.PercentRelativeLayout>
+
+
+
+    <!--text noneObjects-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "20%"
+        app:layout_widthPercent= "50%"
+        app:layout_marginTopPercent= "25%"
+        app:layout_marginStartPercent="25%"
+        >
+        <TextView
+            android:id="@+id/noneEvents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="25sp"
+            android:visibility="invisible"
+            android:text="לא קיימות פגישות עתידיות"
+            android:gravity="center"
+            android:textColor="#000000" />
+
     </android.support.percent.PercentRelativeLayout>
 
 

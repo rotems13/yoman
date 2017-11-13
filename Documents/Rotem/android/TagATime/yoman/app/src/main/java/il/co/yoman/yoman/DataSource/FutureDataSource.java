@@ -77,6 +77,10 @@ public class FutureDataSource  {
                     for (int j = 11 ; j<16 ; j++){
                     startTime += myCharArray[j];
                     }
+                    String time[] = startTime.split(":");
+                    int hour = Integer.parseInt(time[0]);
+                    int minute = Integer.parseInt(time[1]);
+
                     String date = "";
                     for (int z = 0 ; z<10 ; z ++) {
                         date += myCharArray[z];
@@ -94,15 +98,14 @@ public class FutureDataSource  {
 
                     String FullDate = new SimpleDateFormat("EEEE, d MMMM , yyyy").format(cal.getTime());
 
-                    String endTime = "00:00";//c.getString("title");
-                    String nameOfCreate = c.getString("resource");
-                    String title = c.getString("services");
-                    String picTitle = "pi";//c.getString(" futureEvents ");
-                    String status = "status";//c.getString("siteURL");
-                    String picStatus = "pi";//c.getString("siteURL");
+                    String resource = c.getString("resource");
+                    String services = c.getString("services");
+                    String status = c.getString("eStatus");
+                    String eColor = c.getString("eColor");
+                    String eStatusColor = c.getString("eStatusColor");
+                    String Url = c.getString("eURL");
 
-                    FutureEvent Event = new FutureEvent(startTime,endTime,nameOfCreate,
-                            title,picTitle,status,picStatus, FullDate, Year, month,day);
+                    FutureEvent Event = new FutureEvent(startTime,resource, services,status,eColor,eStatusColor,Url, FullDate, Year, month,day,hour,minute);
                     EventsFuture.add(Event);
                 }
                 Collections.sort(EventsFuture, new Comparator<FutureEvent>(){
@@ -116,6 +119,10 @@ public class FutureDataSource  {
                        else if (t1.getMonth() == t2.getMonth())
                            if (t1.getDay() > t2.getDay())
                                return 1;
+                       else if (t1.getDay() == t2.getDay())
+                           if (t1.getHour()*60 + t1.getMinute() > t2.getHour()*60 +t2.getMinute())
+                               return 1;
+
                        else return -1;
                         return 0;
                     }
@@ -135,45 +142,29 @@ public class FutureDataSource  {
 
     public static class FutureEvent {
         private String startTime;
-        private String endTime;
-        private String nameOfCreate;
-        private String title;
-        private String picTitle;
-        private String status;
-        private String picStatus;
+        private String resource;
+        private String services;
+        private String status, eColor;
+        private String eStatusColor;
         private String date;
-        private int year, month, day;
+        private String Url;
+        private int year, month, day, hour, minute;
 
-
-        @Override
-        public String toString() {
-            return "FutureEvent{" +
-                    "startTime='" + startTime + '\'' +
-                    ", endTime='" + endTime + '\'' +
-                    ", nameOfCreate='" + nameOfCreate + '\'' +
-                    ", title='" + title + '\'' +
-                    ", picTitle='" + picTitle + '\'' +
-                    ", status='" + status + '\'' +
-                    ", picStatus='" + picStatus + '\'' +
-                    ", date='" + date + '\'' +
-                    '}';
-        }
-
-        public FutureEvent(String startTime, String endTime, String nameOfCreate,
-                           String title, String picTitle, String status, String picStatus, String date, int year, int month, int day)  {
+        public FutureEvent(String startTime, String resource, String services, String status, String eColor, String eStatusColor,String url, String date, int year, int month, int day, int hour, int minute) {
             this.startTime = startTime;
-            this.endTime = endTime;
-            this.nameOfCreate = nameOfCreate;
-            this.title = title;
-            this.picTitle = picTitle;
+            this.resource = resource;
+            this.services = services;
             this.status = status;
+            this.eColor = eColor;
+            this.eStatusColor = eStatusColor;
             this.date = date;
-            this.picStatus = picStatus;
+            Url = url;
             this.year = year;
             this.month = month;
             this.day = day;
+            this.hour = hour;
+            this.minute = minute;
         }
-
 
         public String getStartTime() {
             return startTime;
@@ -183,36 +174,20 @@ public class FutureDataSource  {
             this.startTime = startTime;
         }
 
-        public String getEndTime() {
-            return endTime;
+        public String getResource() {
+            return resource;
         }
 
-        public void setEndTime(String endTime) {
-            this.endTime = endTime;
+        public void setResource(String resource) {
+            this.resource = resource;
         }
 
-        public String getNameOfCreate() {
-            return nameOfCreate;
+        public String getServices() {
+            return services;
         }
 
-        public void setNameOfCreate(String nameOfCreate) {
-            this.nameOfCreate = nameOfCreate;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getPicTitle() {
-            return picTitle;
-        }
-
-        public void setPicTitle(String picTitle) {
-            this.picTitle = picTitle;
+        public void setServices(String services) {
+            this.services = services;
         }
 
         public String getStatus() {
@@ -223,12 +198,20 @@ public class FutureDataSource  {
             this.status = status;
         }
 
-        public String getPicStatus() {
-            return picStatus;
+        public String geteColor() {
+            return eColor;
         }
 
-        public void setPicStatus(String picStatus) {
-            this.picStatus = picStatus;
+        public void seteColor(String eColor) {
+            this.eColor = eColor;
+        }
+
+        public String geteStatusColor() {
+            return eStatusColor;
+        }
+
+        public void seteStatusColor(String eStatusColor) {
+            this.eStatusColor = eStatusColor;
         }
 
         public String getDate() {
@@ -239,6 +222,13 @@ public class FutureDataSource  {
             this.date = date;
         }
 
+        public String getUrl() {
+            return Url;
+        }
+
+        public void setUrl(String url) {
+            Url = url;
+        }
 
         public int getYear() {
             return year;
@@ -262,6 +252,39 @@ public class FutureDataSource  {
 
         public void setDay(int day) {
             this.day = day;
+        }
+
+        @Override
+        public String toString() {
+            return "FutureEvent{" +
+                    "startTime='" + startTime + '\'' +
+                    ", resource='" + resource + '\'' +
+                    ", services='" + services + '\'' +
+                    ", status='" + status + '\'' +
+                    ", eColor='" + eColor + '\'' +
+                    ", eStatusColor='" + eStatusColor + '\'' +
+                    ", date='" + date + '\'' +
+                    ", Url='" + Url + '\'' +
+                    ", year=" + year +
+                    ", month=" + month +
+                    ", day=" + day +
+                    '}';
+        }
+
+        public int getHour() {
+            return hour;
+        }
+
+        public void setHour(int hour) {
+            this.hour = hour;
+        }
+
+        public int getMinute() {
+            return minute;
+        }
+
+        public void setMinute(int minute) {
+            this.minute = minute;
         }
     }
 

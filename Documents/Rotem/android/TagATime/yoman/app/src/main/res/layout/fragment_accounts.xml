@@ -1,19 +1,72 @@
 <android.support.percent.PercentRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_heightPercent="100%"
-    app:layout_widthPercent="100%"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/accCotnainer"
     android:layoutDirection="ltr"
     android:windowSoftInputMode = "stateAlwaysHidden"
+    android:background="#37474f"
+    tools:context="il.co.yoman.yoman.Account.webViewFrag">
 
-    android:background="#ffffff"
+    <!--טקסט קצה שמאל התנתק -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "23%"
+        app:layout_marginTopPercent= "1%"
+        app:layout_marginStartPercent="2%"
+        >
 
-    android:id="@+id/accCotnainer"
-    tools:context="il.co.yoman.yoman.accountsFrag">
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="התנתק"
+            android:textColor="#ffffff" />
 
+    </android.support.percent.PercentRelativeLayout>
+    <!--טקסט כותרת קצה ימין    -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "33%"
+        app:layout_marginTopPercent= "2%"
+        app:layout_marginStartPercent="65%"
+        >
+
+        <TextView
+            android:id="@+id/newManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="הרשמה כבעל עסק"
+            android:textAlignment="gravity"
+            android:textColor="#ffffff" />
+
+    </android.support.percent.PercentRelativeLayout>
+    <!--טקסט צור קשר -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "23%"
+        app:layout_marginTopPercent= "1%"
+        app:layout_marginStartPercent="27%"
+        >
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="צור קשר"
+            android:textColor="#ffffff" />
+
+    </android.support.percent.PercentRelativeLayout>
+    <!-- recycle View -->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -21,79 +74,53 @@
         app:layout_widthPercent= "100%"
         >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvAccounts"
-        app:layout_marginBottomPercent= "9%"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvAccounts"
+            android:background="#f4f4f4"
+            app:layout_marginTopPercent= "7%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
     </android.support.percent.PercentRelativeLayout>
-
+    <!-- ProgressBar -->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_heightPercent= "25%"
         app:layout_widthPercent= "25%"
-        android:layout_alignParentRight="true"
         app:layout_marginEndPercent= "38.5%"
-        app:layout_marginTopPercent= "32.5%"
-        >
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-    </android.support.percent.PercentRelativeLayout>
-
-
-    <android.support.percent.PercentRelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_heightPercent= "9%"
-        app:layout_widthPercent= "45%"
-        app:layout_marginEndPercent= "2%"
-        app:layout_marginTopPercent= "91%"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        >
-
-        <Button
-            android:id="@+id/btnNew"
-            android:background="@drawable/mybutton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="הזמן תור חדש"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </android.support.percent.PercentRelativeLayout>
-
-    <android.support.percent.PercentRelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_heightPercent= "9%"
-        app:layout_widthPercent= "45%"
-        app:layout_marginEndPercent= "75%"
-        app:layout_marginTopPercent= "91%"
+        app:layout_marginTopPercent= "37.5%"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true">
 
-        <Button
-            android:id="@+id/btnNewLogOut"
-            android:background="@drawable/mybutton"
+        <ProgressBar
+            android:id="@+id/progressBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="צא"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:backgroundTint="#37474f"
             />
     </android.support.percent.PercentRelativeLayout>
 
+    <!--text noneObjects-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "20%"
+        app:layout_widthPercent= "50%"
+        app:layout_marginTopPercent= "25%"
+        app:layout_marginStartPercent="25%"
+        >
+        <TextView
+            android:id="@+id/noneEvents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="25sp"
+            android:visibility="invisible"
+            android:text="לא קיימים עסקים רשומים"
+            android:gravity="center"
+            android:textColor="#000000" />
+
+    </android.support.percent.PercentRelativeLayout>
 
 
 </android.support.percent.PercentRelativeLayout>
