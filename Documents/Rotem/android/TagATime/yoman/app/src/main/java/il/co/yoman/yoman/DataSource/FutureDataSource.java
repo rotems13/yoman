@@ -87,7 +87,7 @@ public class FutureDataSource  {
                     }
                     String splitDate[] = date.split("-");
                     int Year = Integer.parseInt(splitDate[0]);
-                    int month = Integer.parseInt(splitDate[1]);
+                    int month = Integer.parseInt(splitDate[1])-1;
                     int day = Integer.parseInt(splitDate[2]);
 
                     Calendar cal = Calendar.getInstance();
@@ -115,15 +115,14 @@ public class FutureDataSource  {
                            return 1;
                        else if (t1.getYear() == t2.getYear())
                            if (t1.getMonth() > t2.getMonth())
-                               return 1;
+                               return 1; else return  -1;
                        else if (t1.getMonth() == t2.getMonth())
                            if (t1.getDay() > t2.getDay())
-                               return 1;
+                               return 1; else return  -1;
                        else if (t1.getDay() == t2.getDay())
                            if (t1.getHour()*60 + t1.getMinute() > t2.getHour()*60 +t2.getMinute())
-                               return 1;
+                               return 1; else return  -1;
 
-                       else return -1;
                         return 0;
                     }
                 });
@@ -140,7 +139,7 @@ public class FutureDataSource  {
         }.execute();
     }
 
-    public static class FutureEvent {
+    public static class FutureEvent{// implements Comparable {
         private String startTime;
         private String resource;
         private String services;
@@ -169,91 +168,69 @@ public class FutureDataSource  {
         public String getStartTime() {
             return startTime;
         }
-
         public void setStartTime(String startTime) {
             this.startTime = startTime;
         }
-
         public String getResource() {
             return resource;
         }
-
         public void setResource(String resource) {
             this.resource = resource;
         }
-
         public String getServices() {
             return services;
         }
-
         public void setServices(String services) {
             this.services = services;
         }
-
         public String getStatus() {
             return status;
         }
-
         public void setStatus(String status) {
             this.status = status;
         }
-
         public String geteColor() {
             return eColor;
         }
-
         public void seteColor(String eColor) {
             this.eColor = eColor;
         }
-
         public String geteStatusColor() {
             return eStatusColor;
         }
-
         public void seteStatusColor(String eStatusColor) {
             this.eStatusColor = eStatusColor;
         }
-
         public String getDate() {
             return date;
         }
-
         public void setDate(String date) {
             this.date = date;
         }
-
         public String getUrl() {
             return Url;
         }
-
         public void setUrl(String url) {
             Url = url;
         }
-
         public int getYear() {
             return year;
         }
-
         public void setYear(int year) {
             this.year = year;
         }
-
         public int getMonth() {
             return month;
         }
-
         public void setMonth(int month) {
             this.month = month;
         }
-
         public int getDay() {
             return day;
         }
-
         public void setDay(int day) {
             this.day = day;
         }
-
         @Override
         public String toString() {
             return "FutureEvent{" +
@@ -270,22 +247,43 @@ public class FutureDataSource  {
                     ", day=" + day +
                     '}';
         }
-
         public int getHour() {
             return hour;
         }
-
         public void setHour(int hour) {
             this.hour = hour;
         }
-
         public int getMinute() {
             return minute;
         }
-
         public void setMinute(int minute) {
             this.minute = minute;
         }
+
+
+//        @Override
+//        public int compareTo(@NonNull Object o) {
+//            if (o instanceof FutureEvent) {
+//                FutureEvent o1 = (FutureEvent) o;
+//
+//
+//                if (this.getYear() > o1.getYear())
+//                    return 1;
+//                else if (this.getYear() == o1.getYear())
+//                    if (this.getMonth() > o1.getMonth())
+//                        return 1;
+//                    else if (this.getMonth() == o1.getMonth())
+//                        if (this.getDay() > o1.getDay())
+//                            return 1;
+//                        else if (this.getDay() == o1.getDay())
+//                            if (this.getHour() * 60 + this.getMinute() > o1.getHour() * 60 + o1.getMinute())
+//                                return 1;
+//
+//                            else return -1;
+//                return 0;
+//            }
+//            return 0;
+//        }
     }
 
 

@@ -49,7 +49,7 @@ public class description extends Fragment implements OnMapReadyCallback  {
 
         View v           =        inflater.inflate(R.layout.fragment_description, container, false);
         title            =        v.findViewById(R.id.titleAccount);
-        count            =        v.findViewById(R.id.countAccount);
+//        count            =        v.findViewById(R.id.countAccount);
         futureEvents     =        v.findViewById(R.id.futureEvents);
         descriptionFrag  =        v.findViewById(R.id.businessDescription);
         bottom_line      =        v.findViewById(R.id.bottom_line);
@@ -58,9 +58,9 @@ public class description extends Fragment implements OnMapReadyCallback  {
         title.setText(strTitle);
         bottom_line.setBackground(getResources().getDrawable(R.drawable.shadow));
         descriptionFrag.setTextColor(Color.WHITE);
-        futureEvents.setText("הפגישות שלי " + "(" + strFuture +")");
+        futureEvents.setText("פגישות עתידיות " + "(" + strFuture +")");
 
-        count.setText("מס׳ אירועים: " + strFuture);
+//        count.setText("מס׳ אירועים: " + strFuture);
         futureEvents.setOnClickListener(new View.OnClickListener() {
 
 
@@ -123,7 +123,7 @@ public class description extends Fragment implements OnMapReadyCallback  {
 
         getFragmentManager().
                 beginTransaction().
-                replace(R.id.descriptionContainer, fragInfo.newInstance(link, strTitle, description, strFuture, nick)).
+                replace(R.id.descriptionContainer, fragInfo.newInstance(link, strTitle, strFuture, nick)).
                 commit();
 
 

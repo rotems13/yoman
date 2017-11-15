@@ -11,46 +11,48 @@
 
     tools:context="il.co.yoman.yoman.Account.webViewFrag">
 
-    <!--טקסט קצה שמאל תורים עתידיים שמאל -->
+    <!--לוגו קצה שמאל תורים עתידיים שמאל -->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent= "6%"
-        app:layout_widthPercent= "23%"
+        app:layout_heightPercent= "8%"
+        app:layout_widthPercent= "25%"
         app:layout_marginTopPercent= "1%"
         app:layout_marginStartPercent="2%"
         >
 
-        <TextView
+        <ImageView
             android:id="@+id/countAccount"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:visibility="invisible"
-            android:text="TextView"
+            android:src="@drawable/yomanlogo2x"
             android:textColor="#ffffff" />
 
     </android.support.percent.PercentRelativeLayout>
-
     <!--טקסט כותרת קצה ימין-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_heightPercent= "6%"
-        app:layout_widthPercent= "23%"
-        app:layout_marginTopPercent= "2%"
-        app:layout_marginStartPercent="75%"
-        android:id="@+id/percentRelativeLayout3">
+        app:layout_widthPercent= "30%"
+        app:layout_marginTopPercent= "3.5%"
+        app:layout_marginStartPercent="65%"
+        >
 
         <TextView
             android:id="@+id/titleAccount"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="TextView"
-            android:textAlignment="gravity"
+            android:textSize="18dp"
+            android:gravity="right"
             android:textColor="#ffffff" />
 
     </android.support.percent.PercentRelativeLayout>
+
+
+
 
     <!--תפריט - פגישות - web-->
     <android.support.percent.PercentRelativeLayout

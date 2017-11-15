@@ -51,7 +51,7 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        View v                             =    inflater.inflate(R.layout.activity_main, container, false);
+        View v                             =    inflater.inflate(R.layout.fragment_accounts, container, false);
         Toolbar toolbar                    =    v.findViewById(R.id.toolbar);
         accounts                           =    v.findViewById(R.id.rvAccounts);
         progressBar                        =    v.findViewById(R.id.progressBar);
@@ -137,8 +137,7 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
         public void onBindViewHolder(AccountsViewHolder holder, int position) {
         AccountDataSource.Account account = data.get(position);
             holder.tvTitle.setText(account.getTitle());
-            holder.tvDescription.setText(account.getDescription());
-            holder.tvCount.setText(account.getFutureEvents() + " תורים עתידיים");
+            holder.tvCount.setText(account.getFutureEvents());
 
         }
 
@@ -149,14 +148,12 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
 
         class AccountsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             TextView tvTitle;
-            TextView tvDescription;
             TextView tvCount;
 
             public AccountsViewHolder(View itemView) {
                 super(itemView);
 
                 tvTitle = itemView.findViewById(R.id.tvTitle);
-                tvDescription = itemView.findViewById(R.id.tvDescription);
                 tvCount = itemView.findViewById(R.id.tvFuture);
 
                 itemView.setOnClickListener(this);
@@ -165,9 +162,8 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
             @Override
             public void onClick(View view) {
                 int position = getAdapterPosition();
-                String link = data.get(position).getSiteURL();
+                String linkAccount = data.get(position).getSiteURL();
                 String title = data.get(position).getTitle();
-                String description = data.get(position).getDescription();
                 String future = data.get(position).getFutureEvents();
                 String nick = data.get(position).getNick();
 
@@ -177,7 +173,6 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
 
                     Bundle bundle = new Bundle();
                     bundle.putString("title",title);
-                    bundle.putString("description", description);
                     bundle.putString("future", future);
                     bundle.putString("nick",nick);
                     bundle.putString("token",token);
@@ -188,7 +183,7 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
 //                        actionBar.hide();
                     activity.getSupportFragmentManager().
                             beginTransaction().
-                            replace(R.id.accCotnainer, fragInfo.newInstance(link, title, description, future, nick)).
+                            replace(R.id.accCotnainer, fragInfo.newInstance(linkAccount, title, future, nick)).
                             commit();
                 }
             }

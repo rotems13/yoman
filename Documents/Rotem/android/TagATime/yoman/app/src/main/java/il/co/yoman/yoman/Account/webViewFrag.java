@@ -30,18 +30,17 @@ import static il.co.yoman.yoman.welcomeScreen.getToken;
 public class webViewFrag extends Fragment {
     private WebView          webView;
     private TextView         title, count, meetingsTag, bottom_Line, futureEvents, descriptionFrag;
-    private String           link, strTitle, strFuture, nick, token,mobileNumber;
-    public  webViewFrag      newInstance(String link, String title, String description, String future, String nick ) {
-//        Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
-//        if(toolbar == null){
-//            getActivity().getSupportActionBar().hide();
-//        }else{
-//            getActivity().getSupportActionBar().hide();
-//        }
+    private String           strTitle, strFuture, nick, token,mobileNumber;
+    private static String    linkAccount;
+
+    public static String getLinkAccount() {
+        return linkAccount;
+    }
+    public  webViewFrag      newInstance(String linkAccount, String title, String future, String nick ) {
+
         Bundle args = new Bundle();
-        args.putString("link", link);
+        args.putString("link", linkAccount);
         args.putString("title", title);
-        args.putString("description", description);
         args.putString("future", future);
         args.putString("nick", nick);
 
@@ -58,7 +57,7 @@ public class webViewFrag extends Fragment {
         }
 
 
-        link             =        getArguments().getString("link");
+        linkAccount      =        getArguments().getString("link");
         strTitle         =        this.getArguments().getString("title");
         strFuture        =        this.getArguments().getString("future");
         nick             =        this.getArguments().getString("nick");
@@ -68,7 +67,6 @@ public class webViewFrag extends Fragment {
         View v           =        inflater.inflate(R.layout.fragment_web_view, container, false);
         webView          =        v.findViewById(R.id.webView);
         title            =        v.findViewById(R.id.titleAccount);
-//        count            =        v.findViewById(R.id.countAccount);
         futureEvents     =        v.findViewById(R.id.futureEvents);
         descriptionFrag  =        v.findViewById(R.id.businessDescription);
         meetingsTag      =        v.findViewById(R.id.webViewTag);
@@ -77,8 +75,7 @@ public class webViewFrag extends Fragment {
         title.setText(strTitle);
         meetingsTag.setTextColor(Color.WHITE);
         bottom_Line.setBackground( getResources().getDrawable(R.drawable.shadow) );
-//        count.setText("מס׳ אירועים: " + strFuture);
-        futureEvents.setText("הפגישות שלי " + "(" + strFuture +")");
+        futureEvents.setText("פגישות עתידיות " + "(" + strFuture +")");
 
 
         webView.setOnTouchListener(new View.OnTouchListener() {
@@ -92,7 +89,7 @@ public class webViewFrag extends Fragment {
         });
 
         config(webView);
-        webView.loadUrl(link);
+        webView.loadUrl(linkAccount);
         futureEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,7 +163,6 @@ public class webViewFrag extends Fragment {
     public void moveToFutureEvents(){
         Bundle bundle = new Bundle();
         bundle.putString("title",strTitle);
-        bundle.putString("link",link);
         bundle.putString("token", getToken());
         bundle.putString("nick", nick);
         bundle.putString("future", strFuture);
@@ -188,7 +184,7 @@ public class webViewFrag extends Fragment {
     public void moveToDescription(){
         Bundle bundle = new Bundle();
         bundle.putString("title",strTitle);
-        bundle.putString("link",link);
+        bundle.putString("link",linkAccount);
         bundle.putString("nick",nick);
         bundle.putString("token", token);
         bundle.putString("future", strFuture);

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import il.co.yoman.yoman.R;
 
+import static il.co.yoman.yoman.Account.webViewFrag.getLinkAccount;
 import static il.co.yoman.yoman.welcomeScreen.getMobileNumber;
 import static il.co.yoman.yoman.welcomeScreen.getToken;
 
@@ -28,13 +29,12 @@ import static il.co.yoman.yoman.welcomeScreen.getToken;
 public class fullWebView extends Fragment {
     private WebView          webView;
     private TextView         title;
-    private String           link, strTitle, strFuture, description, token,mobileNumber, nick;
+    private String           link, strTitle, strFuture, token,mobileNumber, nick;
 
-    public  fullWebView      newInstance(String link, String title, String description, String future, String nick ) {
+    public  fullWebView      newInstance(String link, String title, String future, String nick ) {
         Bundle args = new Bundle();
         args.putString("link", link);
         args.putString("title", title);
-        args.putString("description", description);
         args.putString("future", future);
         args.putString("nick", nick);
 
@@ -128,7 +128,7 @@ public class fullWebView extends Fragment {
     public void moveToFutureEvents(){
         Bundle bundle = new Bundle();
         bundle.putString("title",strTitle);
-        bundle.putString("link",link);
+        bundle.putString("link",getLinkAccount());
         bundle.putString("token", getToken());
         bundle.putString("nick", nick);
         bundle.putString("future", strFuture);

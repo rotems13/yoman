@@ -24,6 +24,8 @@ import il.co.yoman.yoman.DataSource.FutureDataSource;
 import il.co.yoman.yoman.R;
 import il.co.yoman.yoman.accountsFrag;
 
+import static il.co.yoman.yoman.Account.webViewFrag.getLinkAccount;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,9 +33,11 @@ import il.co.yoman.yoman.accountsFrag;
 public class futureEvents extends Fragment  implements FutureDataSource.OnFutureArrivedListener {
 
     private TextView         title, count, meetingsTag, futureEvents, bottom_line, descriptionFrag, noneEvents;
-    private String           link, strTitle, strFuture, description, token,mobileNumber, nick;
+    private String           strTitle, strFuture, description, token,mobileNumber, nick;
     private ProgressBar      progressBar;
     private RecyclerView     rvEvents;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -42,7 +46,6 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
             container.removeAllViews();
         }
 
-        link             =        getArguments().getString("link");
         strTitle         =        this.getArguments().getString("title");
         strFuture        =        this.getArguments().getString("future");
         mobileNumber     =        getArguments().getString("mobileNumber");
@@ -52,7 +55,6 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
         View v           =        inflater.inflate(R.layout.fragment_future_event, container, false);
         progressBar      =        v.findViewById(R.id.progressBar);
         title            =        v.findViewById(R.id.titleAccount);
-        count            =        v.findViewById(R.id.countAccount);
         futureEvents     =        v.findViewById(R.id.futureEvents);
         bottom_line      =        v.findViewById(R.id.bottom_line);
         descriptionFrag  =        v.findViewById(R.id.businessDescription);
@@ -63,9 +65,7 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
         bottom_line.setBackground(getResources().getDrawable(R.drawable.shadow));
         futureEvents.setTextColor(Color.WHITE);
         title.setText(strTitle);
-        count.setText("מס׳ אירועים: " + strFuture);
-        futureEvents.setText("הפגישות שלי " + "(" + strFuture +")");
-
+        futureEvents.setText("פגישות עתידיות " + "(" + strFuture +")");
 
         FutureDataSource.getEvents(this, nick, mobileNumber , token);
         meetingsTag.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +87,7 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
     public void moveToMeetings() {
         Bundle bundle = new Bundle();
         bundle.putString("title", strTitle);
-        bundle.putString("link", link);
+        bundle.putString("link", getLinkAccount());
         bundle.putString("token", token);
         bundle.putString("future", strFuture);
         bundle.putString("nick", nick);
@@ -97,16 +97,14 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
 
         getFragmentManager().
                 beginTransaction().
-                replace(R.id.futureContainer, fragInfo.newInstance(link, strTitle, description, strFuture, nick)).
+                replace(R.id.futureContainer, fragInfo.newInstance(getLinkAccount(), strTitle, strFuture, nick)).
                 commit();
-
-
     }
+
     public void moveToDescription() {
         Bundle bundle = new Bundle();
         bundle.putString("title", strTitle);
-        bundle.putString("link", link);
-        bundle.putString("description", description);
+        bundle.putString("link", getLinkAccount());
         bundle.putString("future", strFuture);
         bundle.putString("token", token);
         bundle.putString("nick", nick);
@@ -136,7 +134,6 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
 
     }
 
-
     class futureEventsAdapter extends RecyclerView.Adapter<futureEventsAdapter.FutureViewHolder> {
         //properties:
         List<FutureDataSource.FutureEvent> data;
@@ -159,7 +156,6 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
                     return 0;
             }
                 return 2;
-
         }
 
         @Override
@@ -235,7 +231,7 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
 
                     getFragmentManager().
                             beginTransaction().
-                            replace(R.id.futureContainer, fragInfo.newInstance(link, title, description,strFuture, nick)).
+                            replace(R.id.futureContainer, fragInfo.newInstance(link, title,strFuture, nick)).
                             commit();
                 }
             }

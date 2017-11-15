@@ -10,35 +10,33 @@
     android:background="#37474f"
     tools:context="il.co.yoman.yoman.Account.webViewFrag">
 
-    <!--טקסט קצה שמאל תורים עתידיים שמאל -->
+    <!--לוגו קצה שמאל תורים עתידיים שמאל -->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent= "6%"
-        app:layout_widthPercent= "23%"
+        app:layout_heightPercent= "8%"
+        app:layout_widthPercent= "25%"
         app:layout_marginTopPercent= "1%"
         app:layout_marginStartPercent="2%"
         >
 
-        <TextView
+        <ImageView
             android:id="@+id/countAccount"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:visibility="invisible"
-            android:text="TextView"
+            android:src="@drawable/yomanlogo2x"
             android:textColor="#ffffff" />
 
     </android.support.percent.PercentRelativeLayout>
-
-    <!--טקסט כותרת קצה ימין    -->
+    <!--טקסט כותרת קצה ימין-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_heightPercent= "6%"
-        app:layout_widthPercent= "23%"
-        app:layout_marginTopPercent= "2%"
-        app:layout_marginStartPercent="75%"
+        app:layout_widthPercent= "30%"
+        app:layout_marginTopPercent= "3.5%"
+        app:layout_marginStartPercent="65%"
         >
 
         <TextView
@@ -46,10 +44,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="TextView"
-            android:textAlignment="gravity"
+            android:textSize="18dp"
+            android:gravity="right"
             android:textColor="#ffffff" />
 
     </android.support.percent.PercentRelativeLayout>
+
+
 
     <!--תפריט - פגישות - webViewTag-->
     <android.support.percent.PercentRelativeLayout
@@ -129,6 +130,21 @@
             android:textColor="#9b9b9b" />
 
     </android.support.percent.PercentRelativeLayout>
+
+    <!-- bottom page -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "100%"
+        app:layout_widthPercent= "100%"
+        app:layout_marginTopPercent= "15%"
+        android:background="#f4f4f4"
+
+
+        >
+
+
+    </android.support.percent.PercentRelativeLayout>
     <!-- recycle View -->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
@@ -142,7 +158,7 @@
             android:background="#f4f4f4"
             app:layout_marginTopPercent= "15%"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             />
     </android.support.percent.PercentRelativeLayout>
 
@@ -183,7 +199,7 @@
             android:visibility="invisible"
             android:text="לא קיימות פגישות עתידיות"
             android:gravity="center"
-            android:textColor="#000000" />
+            android:textColor="#cccccc" />
 
     </android.support.percent.PercentRelativeLayout>
 
