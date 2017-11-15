@@ -26,9 +26,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent= "81%"
-            app:layout_widthPercent= "90%"
+            app:layout_widthPercent= "94%"
             app:layout_marginTopPercent= "9%"
-            app:layout_marginStartPercent="5%"
+            app:layout_marginStartPercent="3%"
             >
 
             <TextView

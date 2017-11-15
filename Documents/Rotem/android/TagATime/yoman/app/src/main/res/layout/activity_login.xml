@@ -113,7 +113,7 @@
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/whitebox"
+                android:background="@drawable/signinbox"
                 android:text="התחבר"
                 android:textColor="#ffffff"
                 android:textSize="21sp" />

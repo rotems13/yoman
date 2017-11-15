@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,10 +22,12 @@ import org.json.JSONObject;
 import il.co.yoman.yoman.DataSource.ServerReq;
 import me.philio.pinentry.PinEntryView;
 
+import static il.co.yoman.yoman.accountsFrag.drawer;
 import static il.co.yoman.yoman.services.NetworkStateReceiver.isOnlineReciver;
 import static il.co.yoman.yoman.services.NetworkStateReceiver.makeToast;
 import static il.co.yoman.yoman.welcomeScreen.getMobileNumber;
 import static il.co.yoman.yoman.welcomeScreen.getToken;
+import static il.co.yoman.yoman.welcomeScreen.isFragment1Shown;
 
 public class verifyActivity extends AppCompatActivity {
     protected static String      verifyToken;
@@ -47,7 +50,6 @@ public class verifyActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);     //  Fixed Portrait orientation
-
 
 //            loginToken      =   getIntent().getStringExtra("token");
 //            mobileNumber    =   getIntent().getStringExtra("mobileNumber");
@@ -106,6 +108,7 @@ public class verifyActivity extends AppCompatActivity {
         bundle.putString("mobileNumber", getMobileNumber());
         accountsFrag fragInfo = new accountsFrag();
         fragInfo.setArguments(bundle);
+        isFragment1Shown = true;
         getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.containerVerifyac, fragInfo).
@@ -126,8 +129,15 @@ public class verifyActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(verifyActivity.this, loginActivity.class));
-        finish();
+        if (isFragment1Shown){
+            if (drawer.isDrawerVisible(GravityCompat.START))
+                drawer.closeDrawer(GravityCompat.START);
+            else {
+                startActivity(new Intent(verifyActivity.this, loginActivity.class));
+                finish();
+            }
+        }
+
     }
     class getVerifyNumber extends Thread {
         @Override
@@ -203,4 +213,5 @@ public class verifyActivity extends AppCompatActivity {
     public static void setVerifyToken(String verifyToken) {
         verifyActivity.verifyToken = verifyToken;
     }
+
 }

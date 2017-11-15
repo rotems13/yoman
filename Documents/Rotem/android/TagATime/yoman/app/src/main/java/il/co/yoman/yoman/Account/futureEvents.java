@@ -3,6 +3,7 @@ package il.co.yoman.yoman.Account;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -187,18 +188,16 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
             holder.Date.setText(event.getDate() );
             holder.tvStatus.setText(event.getStatus());
             holder.create.setText(event.getResource());
-            holder.picStatus.setBackgroundColor(Color.parseColor(event.geteStatusColor()));
-         //   holder.picStatus.setText(event.getStartTime() + " תורים עתידיים");
-           // holder.picTitle.setImageIcon(event.getStartTime() + " תורים עתידיים");
-
+            //change circle background
+            GradientDrawable sd = (GradientDrawable) holder.picStatus.getBackground().mutate();
+            sd.setColor(Color.parseColor(event.geteStatusColor()));
+            sd.invalidateSelf();
         }
         @Override
         public int getItemCount() {
             return data.size();
         }
-
         class FutureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {//} implements View.OnClickListener {
-
 
             TextView tvStartTime, tvTitle, tvStatus, picStatus, Date, line, create;
 
@@ -220,33 +219,31 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
                 int position = getAdapterPosition();
                 String link = data.get(position).getUrl();
                 String title = data.get(position).getResource();
-                String description = data.get(position).getServices();
-                String future = "100";//data.get(position).getFutureEvents();
-
 
                 if (context instanceof FragmentActivity) {
-                    FragmentActivity activity = (FragmentActivity) context;
-
                     Bundle bundle = new Bundle();
-//                    bundle.putString("title", title);
-                    bundle.putString("description", description);
-                    bundle.putString("future", future);
-                    webViewFrag fragInfo = new webViewFrag();
+                    bundle.putString("title", strTitle);
+                    bundle.putString("link", link);
+                    bundle.putString("token", token);
+                    bundle.putString("future", strFuture);
+                    bundle.putString("nick", nick);
+                    bundle.putString("mobileNumber", mobileNumber);
+
+                    fullWebView fragInfo = new fullWebView();
                     fragInfo.setArguments(bundle);
 
 
-                    activity.getSupportFragmentManager().
+                    getFragmentManager().
                             beginTransaction().
-                            replace(R.id.accCotnainer, fragInfo.newInstance(link, title, description, future, "")).
+                            replace(R.id.futureContainer, fragInfo.newInstance(link, title, description,strFuture, nick)).
                             commit();
                 }
             }
 
         }
-
-
-
     }
+
+
     @Override
     public void onResume() {
         super.onResume();

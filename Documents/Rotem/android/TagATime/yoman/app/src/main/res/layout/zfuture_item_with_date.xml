@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="120dp"
     android:backgroundTint="#f4f4f4"
     android:layoutDirection="rtl"
     tools:context="il.co.yoman.yoman.Account.futureEvents"
@@ -29,8 +29,6 @@
             app:layout_marginStartPercent="1.5%"
             app:layout_marginTopPercent= "10%"
             app:layout_marginBottomPercent= "10%"
-
-
             >
 
         <TextView
@@ -163,7 +161,7 @@
             android:layout_height="0dp"
             app:layout_heightPercent= "60%"
             app:layout_widthPercent= "25%"
-            app:layout_marginTopPercent= "20%"
+            app:layout_marginTopPercent= "16%"
             app:layout_marginStartPercent="70%"
             >
             <TextView
@@ -174,15 +172,14 @@
                 android:gravity="center"
                 android:text="מאושר"
                 android:textColor="#9e9e9e" />
-
         </android.support.percent.PercentRelativeLayout>
 
         <!--picStatus-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent= "18%"
-            app:layout_widthPercent= "2.5%"
+            app:layout_heightPercent= "14%"
+            app:layout_widthPercent= "3%"
             app:layout_marginTopPercent= "40%"
             app:layout_marginStartPercent="65%"
             >
@@ -190,10 +187,33 @@
                 android:id="@+id/picStatus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#49c2e2"
+                android:background="@drawable/circle"
                 />
-
         </android.support.percent.PercentRelativeLayout>
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="100dp"
+        android:windowSoftInputMode = "stateAlwaysHidden"
+        android:background="#f4f4f4"
+        tools:context="il.co.yoman.yoman.Account.webViewFrag">
+    </android.support.percent.PercentRelativeLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "100%"
+        app:layout_widthPercent= "100%"
+        app:layout_marginStartPercent="1.5%"
+        app:layout_marginTopPercent= "80%"
+        app:layout_marginBottomPercent= "10%"
+        >
 
     </android.support.percent.PercentRelativeLayout>
 

@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,12 +21,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import static il.co.yoman.yoman.accountsFrag.drawer;
 import static il.co.yoman.yoman.services.NetworkStateReceiver.isOnlineReciver;
 
 public class welcomeScreen extends AppCompatActivity {
     TextView                            nextPage;
     protected static String             token, mobileNumber;
-    private SharedPreferences          prefs;
+    private SharedPreferences           prefs;
+    public static boolean               isFragment1Shown=false ;
 
 //    private static String devieceToken;
 //    private static String android_id;
@@ -42,8 +45,6 @@ public class welcomeScreen extends AppCompatActivity {
         } else {// full screen + visible keyboard
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-
-
         setContentView(R.layout.activity_welcome_screen);
         nextPage        =        findViewById(R.id.continue1);
         nextPage.setPaintFlags(nextPage.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -54,7 +55,6 @@ public class welcomeScreen extends AppCompatActivity {
             }
         });
     }
-
     private void nextActivity() {
         if (isOnline()) {
             if (checkIfUserHaveSavedToken()) {  // if user already sign in  --> move to accounts
@@ -93,7 +93,6 @@ public class welcomeScreen extends AppCompatActivity {
         final AlertDialog alert = dialog.create();
         alert.show();
     }
-
     private void hideActionBar(){
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -123,17 +122,23 @@ public class welcomeScreen extends AppCompatActivity {
     }
     private void accountsFragTransfer() {
         Bundle bundle = new Bundle();
-        bundle.putString("token", token);
-        bundle.putString("mobileNumber", mobileNumber);
+        bundle.putString("token", getToken());
+        bundle.putString("mobileNumber", getMobileNumber());
         accountsFrag fragInfo = new accountsFrag();
         fragInfo.setArguments(bundle);
-
+        isFragment1Shown = true;
         getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.welcomeContainer, fragInfo).
                 commit();
+//        Intent i = new Intent(welcomeScreen.this, MainActivity.class);
+//        i.putExtra("token", token);
+//        i.putExtra("mobileNumber", mobileNumber);
+//        startActivity(i);
+//        finish();
 
     }
+
     public static String getMobileNumber() {
         return mobileNumber;
     }
@@ -146,5 +151,18 @@ public class welcomeScreen extends AppCompatActivity {
     public static void setToken(String token) {
         welcomeScreen.token = token;
     }
-
+    @Override
+    public void onBackPressed() {
+        if (isFragment1Shown){
+            if (drawer.isDrawerVisible(GravityCompat.START))
+            drawer.closeDrawer(GravityCompat.START);
+            else {
+                Intent a = new Intent(Intent.ACTION_MAIN);
+                a.addCategory(Intent.CATEGORY_HOME);
+                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(a);
+            }
+        }
+        else super.onBackPressed();
+    }
 }

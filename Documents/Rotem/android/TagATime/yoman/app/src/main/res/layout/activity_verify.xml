@@ -79,7 +79,7 @@
                 android:textSize="21sp"
                 android:text="אמת קוד"
                 android:textColor="#ffffff"
-                android:background="@drawable/whitebox"
+                android:background="@drawable/signinbox"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />

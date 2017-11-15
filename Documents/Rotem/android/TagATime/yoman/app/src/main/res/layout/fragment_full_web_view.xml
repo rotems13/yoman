@@ -1,0 +1,78 @@
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fullwebContainer"
+    android:layoutDirection="ltr"
+    android:windowSoftInputMode = "stateAlwaysHidden"
+    android:background="#37474f"
+
+    tools:context="il.co.yoman.yoman.Account.webViewFrag">
+
+    <!--טקסט קצה שמאל תורים עתידיים שמאל -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "23%"
+        app:layout_marginTopPercent= "1%"
+        app:layout_marginStartPercent="2%"
+        >
+
+        <TextView
+            android:id="@+id/countAccount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:text="TextView"
+            android:textColor="#ffffff" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--טקסט כותרת קצה ימין-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "23%"
+        app:layout_marginTopPercent= "2%"
+        app:layout_marginStartPercent="75%"
+        >
+
+        <TextView
+            android:id="@+id/titleAccount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="TextView"
+            android:textAlignment="gravity"
+            android:textColor="#ffffff" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+
+    <!-- web view -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "100%"
+        app:layout_widthPercent= "100%"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <WebView
+            android:id="@+id/fullwebView"
+            app:layout_marginTopPercent= "7%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </android.support.percent.PercentRelativeLayout>
+
+
+</android.support.percent.PercentRelativeLayout>

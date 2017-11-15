@@ -32,7 +32,12 @@ public class webViewFrag extends Fragment {
     private TextView         title, count, meetingsTag, bottom_Line, futureEvents, descriptionFrag;
     private String           link, strTitle, strFuture, nick, token,mobileNumber;
     public  webViewFrag      newInstance(String link, String title, String description, String future, String nick ) {
-
+//        Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
+//        if(toolbar == null){
+//            getActivity().getSupportActionBar().hide();
+//        }else{
+//            getActivity().getSupportActionBar().hide();
+//        }
         Bundle args = new Bundle();
         args.putString("link", link);
         args.putString("title", title);
@@ -52,6 +57,7 @@ public class webViewFrag extends Fragment {
             container.removeAllViews();
         }
 
+
         link             =        getArguments().getString("link");
         strTitle         =        this.getArguments().getString("title");
         strFuture        =        this.getArguments().getString("future");
@@ -62,7 +68,7 @@ public class webViewFrag extends Fragment {
         View v           =        inflater.inflate(R.layout.fragment_web_view, container, false);
         webView          =        v.findViewById(R.id.webView);
         title            =        v.findViewById(R.id.titleAccount);
-        count            =        v.findViewById(R.id.countAccount);
+//        count            =        v.findViewById(R.id.countAccount);
         futureEvents     =        v.findViewById(R.id.futureEvents);
         descriptionFrag  =        v.findViewById(R.id.businessDescription);
         meetingsTag      =        v.findViewById(R.id.webViewTag);
@@ -71,7 +77,7 @@ public class webViewFrag extends Fragment {
         title.setText(strTitle);
         meetingsTag.setTextColor(Color.WHITE);
         bottom_Line.setBackground( getResources().getDrawable(R.drawable.shadow) );
-        count.setText("מס׳ אירועים: " + strFuture);
+//        count.setText("מס׳ אירועים: " + strFuture);
         futureEvents.setText("הפגישות שלי " + "(" + strFuture +")");
 
 
