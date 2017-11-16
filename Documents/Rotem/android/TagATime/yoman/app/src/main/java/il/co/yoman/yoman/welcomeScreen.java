@@ -28,7 +28,26 @@ public class welcomeScreen extends AppCompatActivity {
     TextView                            nextPage;
     protected static String             token, mobileNumber;
     private SharedPreferences           prefs;
-    public static boolean               isFragment1Shown=false ;
+
+    public static boolean isIsAccountsShown() {
+        return isAccountsShown;
+    }
+
+    public static void setIsAccountsShown(boolean isAccountsShown) {
+        welcomeScreen.isAccountsShown = isAccountsShown;
+    }
+
+    public static boolean               isAccountsShown =false;
+
+    public static boolean isIsWebViewShown() {
+        return isWebViewShown;
+    }
+
+    public static void setIsWebViewShown(boolean isWebViewShown) {
+        welcomeScreen.isWebViewShown = isWebViewShown;
+    }
+
+    public static boolean isWebViewShown = false ;
 
 //    private static String devieceToken;
 //    private static String android_id;
@@ -126,7 +145,7 @@ public class welcomeScreen extends AppCompatActivity {
         bundle.putString("mobileNumber", getMobileNumber());
         accountsFrag fragInfo = new accountsFrag();
         fragInfo.setArguments(bundle);
-        isFragment1Shown = true;
+        isAccountsShown = true;
         getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.welcomeContainer, fragInfo).
@@ -151,9 +170,10 @@ public class welcomeScreen extends AppCompatActivity {
     public static void setToken(String token) {
         welcomeScreen.token = token;
     }
+
     @Override
     public void onBackPressed() {
-        if (isFragment1Shown){
+        if (isAccountsShown){
             if (drawer.isDrawerVisible(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);
             else {
@@ -162,6 +182,9 @@ public class welcomeScreen extends AppCompatActivity {
                 a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(a);
             }
+        }
+        if (isWebViewShown){
+            accountsFragTransfer();
         }
         else super.onBackPressed();
     }

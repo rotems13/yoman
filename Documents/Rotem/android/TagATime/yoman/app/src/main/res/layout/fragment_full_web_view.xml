@@ -22,7 +22,7 @@
         >
 
         <ImageView
-            android:id="@+id/countAccount"
+            android:id="@+id/leftSideLogo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -41,7 +41,7 @@
         >
 
         <TextView
-            android:id="@+id/titleAccount"
+            android:id="@+id/topRightTitleAccount"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="TextView"
@@ -50,9 +50,6 @@
             android:textColor="#ffffff" />
 
     </android.support.percent.PercentRelativeLayout>
-
-
-
 
 
     <!-- web view -->

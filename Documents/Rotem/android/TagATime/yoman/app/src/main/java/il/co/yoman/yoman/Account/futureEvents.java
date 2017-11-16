@@ -4,9 +4,7 @@ package il.co.yoman.yoman.Account;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,11 +18,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import il.co.yoman.yoman.DataSource.AccountDataSource;
 import il.co.yoman.yoman.DataSource.FutureDataSource;
 import il.co.yoman.yoman.R;
 import il.co.yoman.yoman.accountsFrag;
 
-import static il.co.yoman.yoman.Account.webViewFrag.getLinkAccount;
+import static il.co.yoman.yoman.welcomeScreen.getMobileNumber;
+import static il.co.yoman.yoman.welcomeScreen.getToken;
 
 
 /**
@@ -32,49 +32,43 @@ import static il.co.yoman.yoman.Account.webViewFrag.getLinkAccount;
  */
 public class futureEvents extends Fragment  implements FutureDataSource.OnFutureArrivedListener {
 
-    private TextView         title, count, meetingsTag, futureEvents, bottom_line, descriptionFrag, noneEvents;
-    private String           strTitle, strFuture, description, token,mobileNumber, nick;
+    private TextView         topRightTitleAccount, webViewFragTitle, bottom_Line, futureEventsFragTitle, descriptionFragTitle, noneEvents;
     private ProgressBar      progressBar;
     private RecyclerView     rvEvents;
+    private AccountDataSource.Account CurrentAccount;
 
-
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (container != null) {
             container.removeAllViews();
         }
-
-        strTitle         =        this.getArguments().getString("title");
-        strFuture        =        this.getArguments().getString("future");
-        mobileNumber     =        getArguments().getString("mobileNumber");
-        token            =        this.getArguments().getString("token");
-        nick             =        this.getArguments().getString("nick");
+        CurrentAccount              =        this.getArguments().getParcelable("Account");
 
         View v           =        inflater.inflate(R.layout.fragment_future_event, container, false);
+        //upper layer
+        topRightTitleAccount        =        v.findViewById(R.id.topRightTitleAccount);
+        webViewFragTitle            =        v.findViewById(R.id.webViewFragTitle);
+        futureEventsFragTitle       =        v.findViewById(R.id.futureEventsFragTitle);
+        descriptionFragTitle        =        v.findViewById(R.id.descriptionFragTitle);
+        bottom_Line                 =        v.findViewById(R.id.bottom_line);
+
+        topRightTitleAccount.setText(CurrentAccount.getTitle());
+        webViewFragTitle.setTextColor(Color.WHITE);
+        bottom_Line.setBackground( getResources().getDrawable(R.drawable.shadow) );
+        futureEventsFragTitle.setText("פגישות עתידיות " + "(" + CurrentAccount.getFutureEvents() +")");
+
         progressBar      =        v.findViewById(R.id.progressBar);
-        title            =        v.findViewById(R.id.titleAccount);
-        futureEvents     =        v.findViewById(R.id.futureEvents);
-        bottom_line      =        v.findViewById(R.id.bottom_line);
-        descriptionFrag  =        v.findViewById(R.id.businessDescription);
-        meetingsTag      =        v.findViewById(R.id.webViewTag);
         rvEvents         =        v.findViewById(R.id.rvEvents);
         noneEvents       =        v.findViewById(R.id.noneEvents);
 
-        bottom_line.setBackground(getResources().getDrawable(R.drawable.shadow));
-        futureEvents.setTextColor(Color.WHITE);
-        title.setText(strTitle);
-        futureEvents.setText("פגישות עתידיות " + "(" + strFuture +")");
-
-        FutureDataSource.getEvents(this, nick, mobileNumber , token);
-        meetingsTag.setOnClickListener(new View.OnClickListener() {
+        FutureDataSource.getEvents(this, CurrentAccount.getNick(), getMobileNumber() , getToken());
+        webViewFragTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveToMeetings();
             }
         });
-        descriptionFrag.setOnClickListener(new View.OnClickListener() {
+        descriptionFragTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveToDescription();
@@ -83,43 +77,27 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
 
         return v;
     }
-
     public void moveToMeetings() {
         Bundle bundle = new Bundle();
-        bundle.putString("title", strTitle);
-        bundle.putString("link", getLinkAccount());
-        bundle.putString("token", token);
-        bundle.putString("future", strFuture);
-        bundle.putString("nick", nick);
-        bundle.putString("mobileNumber", mobileNumber);
+        bundle.putParcelable("Account", CurrentAccount);
         webViewFrag fragInfo = new webViewFrag();
         fragInfo.setArguments(bundle);
 
         getFragmentManager().
                 beginTransaction().
-                replace(R.id.futureContainer, fragInfo.newInstance(getLinkAccount(), strTitle, strFuture, nick)).
+                replace(R.id.futureContainer, fragInfo.newInstance(CurrentAccount )).
                 commit();
     }
-
     public void moveToDescription() {
         Bundle bundle = new Bundle();
-        bundle.putString("title", strTitle);
-        bundle.putString("link", getLinkAccount());
-        bundle.putString("future", strFuture);
-        bundle.putString("token", token);
-        bundle.putString("nick", nick);
-        bundle.putString("mobileNumber", mobileNumber);
-
+        bundle.putParcelable("Account", CurrentAccount);
         il.co.yoman.yoman.Account.description fragInfo = new description();
         fragInfo.setArguments(bundle);
-
-
         getFragmentManager().
                 beginTransaction().
                 replace(R.id.futureContainer, fragInfo).
                 commit();
     }
-
     @Override
     public void OnFutureArrivedListener(List<FutureDataSource.FutureEvent> EventsFuture) {
         progressBar.setVisibility(View.GONE);
@@ -133,7 +111,6 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
         }
 
     }
-
     class futureEventsAdapter extends RecyclerView.Adapter<futureEventsAdapter.FutureViewHolder> {
         //properties:
         List<FutureDataSource.FutureEvent> data;
@@ -146,7 +123,6 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
             this.context = context;
             this.inflater = LayoutInflater.from(context); //Got the inflater from the Context.
         }
-
         @Override
         public int getItemViewType(int position) {
             String date = this.data.get(position).getDate();
@@ -157,7 +133,6 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
             }
                 return 2;
         }
-
         @Override
         public FutureViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             switch (viewType) {
@@ -173,7 +148,6 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
             return null;
 
         }
-
         @Override
         public void onBindViewHolder(FutureViewHolder holder, int position) {
             FutureDataSource.FutureEvent event = data.get(position);
@@ -194,9 +168,7 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
             return data.size();
         }
         class FutureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {//} implements View.OnClickListener {
-
             TextView tvStartTime, tvTitle, tvStatus, picStatus, Date, line, create;
-
             public FutureViewHolder(View itemView) {
                 super(itemView);
 
@@ -209,37 +181,27 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
                 create = itemView.findViewById(R.id.create);
                 itemView.setOnClickListener(this);
             }
-
             @Override
             public void onClick(View view) {
                 int position = getAdapterPosition();
                 String link = data.get(position).getUrl();
-                String title = data.get(position).getResource();
-
                 if (context instanceof FragmentActivity) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("title", strTitle);
+                    bundle.putParcelable("Account", CurrentAccount);
                     bundle.putString("link", link);
-                    bundle.putString("token", token);
-                    bundle.putString("future", strFuture);
-                    bundle.putString("nick", nick);
-                    bundle.putString("mobileNumber", mobileNumber);
-
                     fullWebView fragInfo = new fullWebView();
                     fragInfo.setArguments(bundle);
 
 
                     getFragmentManager().
                             beginTransaction().
-                            replace(R.id.futureContainer, fragInfo.newInstance(link, title,strFuture, nick)).
+                            replace(R.id.futureContainer, fragInfo.newInstance(link, CurrentAccount)).
                             commit();
                 }
             }
 
         }
     }
-
-
     @Override
     public void onResume() {
         super.onResume();

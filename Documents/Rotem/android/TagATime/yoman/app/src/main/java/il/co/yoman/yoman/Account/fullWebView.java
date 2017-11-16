@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebResourceRequest;
@@ -16,11 +17,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import il.co.yoman.yoman.DataSource.AccountDataSource;
 import il.co.yoman.yoman.R;
 
-import static il.co.yoman.yoman.Account.webViewFrag.getLinkAccount;
-import static il.co.yoman.yoman.welcomeScreen.getMobileNumber;
-import static il.co.yoman.yoman.welcomeScreen.getToken;
+import static il.co.yoman.yoman.services.NetworkStateReceiver.isOnlineReciver;
 
 
 /**
@@ -28,49 +28,45 @@ import static il.co.yoman.yoman.welcomeScreen.getToken;
  */
 public class fullWebView extends Fragment {
     private WebView          webView;
-    private TextView         title;
-    private String           link, strTitle, strFuture, token,mobileNumber, nick;
+    private TextView         topRightTitleAccount;
+    private String           link;
+    private AccountDataSource.Account CurrentAccount;
 
-    public  fullWebView      newInstance(String link, String title, String future, String nick ) {
+    public  fullWebView   newInstance(String link, AccountDataSource.Account CurrentAccount ) {
         Bundle args = new Bundle();
         args.putString("link", link);
-        args.putString("title", title);
-        args.putString("future", future);
-        args.putString("nick", nick);
-
+        args.putParcelable("Account", CurrentAccount);
         fullWebView fragment = new fullWebView();
         fragment.setArguments(args);
         return fragment;
     }
 
-
-        @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             if (container != null) {
                 container.removeAllViews();
             }
-            link             =        getArguments().getString("link");
-            strTitle         =        this.getArguments().getString("title");
-            strFuture        =        this.getArguments().getString("future");
-            nick             =        this.getArguments().getString("nick");
-            mobileNumber     =        getMobileNumber();
-            token            =        getToken();
+            CurrentAccount              =        this.getArguments().getParcelable("Account");
+            link                        =        getArguments().getString("link");
+            //upper layer
+            View v                      =        inflater.inflate(R.layout.fragment_full_web_view, container, false);
+            topRightTitleAccount        =        v.findViewById(R.id.topRightTitleAccount);
+            webView                     =        v.findViewById(R.id.fullwebView);
 
-        // Inflate the layout for this fragment
-        View v           =        inflater.inflate(R.layout.fragment_full_web_view, container, false);
-        webView          =        v.findViewById(R.id.fullwebView);
-        title            =        v.findViewById(R.id.titleAccount);
-        title.setText(strTitle);
-
-        config(webView);
-        webView.loadUrl(link);
-
-        return v;
+            topRightTitleAccount.setText(CurrentAccount.getTitle());
+            webView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (!isOnlineReciver) {
+                    return true;
+                }else
+                    return false;
+            }
+        });
+            config(webView);
+            webView.loadUrl(link);
+            return v;
     }
-
-
-
 
     private void config(final WebView webView) {
         //Enable JavaScript
@@ -78,8 +74,6 @@ public class fullWebView extends Fragment {
         settings.setJavaScriptEnabled(true);
 
         webView.setWebViewClient(new WebViewClient(){
-
-            @SuppressWarnings("deprecation")
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 webView.loadUrl(url);
@@ -107,7 +101,6 @@ public class fullWebView extends Fragment {
             }
         });
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -127,13 +120,7 @@ public class fullWebView extends Fragment {
     }
     public void moveToFutureEvents(){
         Bundle bundle = new Bundle();
-        bundle.putString("title",strTitle);
-        bundle.putString("link",getLinkAccount());
-        bundle.putString("token", getToken());
-        bundle.putString("nick", nick);
-        bundle.putString("future", strFuture);
-        bundle.putString("mobileNumber", getMobileNumber());
-
+        bundle.putParcelable("Account", CurrentAccount);
         futureEvents fragInfo = new futureEvents();
         fragInfo.setArguments(bundle);
 
@@ -144,4 +131,5 @@ public class fullWebView extends Fragment {
 
 
     }
+
 }

@@ -63,7 +63,6 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
         drawer.addDrawerListener(toogle);
         toogle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
         AccountDataSource.getAccounts(this, getToken());
         return v;
     }
@@ -77,18 +76,12 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
         if (id == R.id.logoutMenu) {
             logOut();
         }
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
+         else if (id == R.id.contactusMenu){
+
+        }
+         else if (id == R.id.signAsManagerMenu) {
+
+        }
 
         DrawerLayout drawer = getView().findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -140,7 +133,6 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
             holder.tvCount.setText(account.getFutureEvents());
 
         }
-
         @Override
         public int getItemCount() {
             return data.size();
@@ -152,7 +144,6 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
 
             public AccountsViewHolder(View itemView) {
                 super(itemView);
-
                 tvTitle = itemView.findViewById(R.id.tvTitle);
                 tvCount = itemView.findViewById(R.id.tvFuture);
 
@@ -162,28 +153,32 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
             @Override
             public void onClick(View view) {
                 int position = getAdapterPosition();
-                String linkAccount = data.get(position).getSiteURL();
-                String title = data.get(position).getTitle();
-                String future = data.get(position).getFutureEvents();
+
                 String nick = data.get(position).getNick();
+                String title = data.get(position).getTitle();
+                String description = data.get(position).getDescription();
+                String contactNumber = data.get(position).getContactNumber();
+                String contactAddress = data.get(position).getContactAddress();
+                String future = data.get(position).getFutureEvents();
+                String linkAccount = data.get(position).getSiteURL();
+
 
 
                 if (context instanceof FragmentActivity) {
                     FragmentActivity activity = (FragmentActivity) context;
 
                     Bundle bundle = new Bundle();
+                    AccountDataSource.Account acc = new AccountDataSource.Account(nick,title,description,contactNumber,contactAddress,future,linkAccount);
+                    bundle.putParcelable("Account", acc);
                     bundle.putString("title",title);
                     bundle.putString("future", future);
                     bundle.putString("nick",nick);
                     bundle.putString("token",token);
                     webViewFrag fragInfo = new webViewFrag();
                     fragInfo.setArguments(bundle);
-//                    ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-//                    if (actionBar != null) {
-//                        actionBar.hide();
                     activity.getSupportFragmentManager().
                             beginTransaction().
-                            replace(R.id.accCotnainer, fragInfo.newInstance(linkAccount, title, future, nick)).
+                            replace(R.id.accCotnainer, fragInfo.newInstance(acc)).
                             commit();
                 }
             }

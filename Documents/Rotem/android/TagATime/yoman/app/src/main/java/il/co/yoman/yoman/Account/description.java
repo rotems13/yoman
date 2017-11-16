@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import il.co.yoman.yoman.DataSource.AccountDataSource;
 import il.co.yoman.yoman.R;
 import il.co.yoman.yoman.accountsFrag;
 
@@ -30,76 +31,76 @@ import il.co.yoman.yoman.accountsFrag;
  * A simple {@link Fragment} subclass.
  */
 public class description extends Fragment implements OnMapReadyCallback  {
-    private TextView     title, count, meetingsTag, futureEvents, descriptionFrag, bottom_line;
-    private String       link, strTitle, strFuture, description, mobileNumber, nick, token;
+    private TextView     topRightTitleAccount, webViewFragTitle, futureEventsFragTitle, descriptionFragTitle, bottom_line,
+            phoneDescription, descriptionOfBusiness, nameOfBusiness,emailOfBusiness, adressOfBusiness;
+    private String       strAdress;
+    private AccountDataSource.Account CurrentAccount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (container != null) {
             container.removeAllViews();
         }
+        CurrentAccount                      =        this.getArguments().getParcelable("Account");
+        View v                              =        inflater.inflate(R.layout.fragment_description, container, false);
+        //upper layer
+        topRightTitleAccount                =        v.findViewById(R.id.topRightTitleAccount);
+        webViewFragTitle                    =        v.findViewById(R.id.webViewFragTitle);
+        futureEventsFragTitle               =        v.findViewById(R.id.futureEventsFragTitle);
+        descriptionFragTitle                =        v.findViewById(R.id.descriptionFragTitle);
+        bottom_line                         =        v.findViewById(R.id.bottom_line);
 
-        link = getArguments().getString("link");
-        strTitle = this.getArguments().getString("title");
-        strFuture = this.getArguments().getString("future");
-        mobileNumber = this.getArguments().getString("mobileNumber");
-        token = this.getArguments().getString("token");
-        nick = this.getArguments().getString("nick");
-
-
-        View v           =        inflater.inflate(R.layout.fragment_description, container, false);
-        title            =        v.findViewById(R.id.titleAccount);
-//        count            =        v.findViewById(R.id.countAccount);
-        futureEvents     =        v.findViewById(R.id.futureEvents);
-        descriptionFrag  =        v.findViewById(R.id.businessDescription);
-        bottom_line      =        v.findViewById(R.id.bottom_line);
-        meetingsTag      =        v.findViewById(R.id.webViewTag);
-
-        title.setText(strTitle);
+        topRightTitleAccount.setText(CurrentAccount.getTitle());
         bottom_line.setBackground(getResources().getDrawable(R.drawable.shadow));
-        descriptionFrag.setTextColor(Color.WHITE);
-        futureEvents.setText("פגישות עתידיות " + "(" + strFuture +")");
+        descriptionFragTitle.setTextColor(Color.WHITE);
+        futureEventsFragTitle.setText("פגישות עתידיות " + "(" + CurrentAccount.getFutureEvents() +")");
+        //whitebox
+        nameOfBusiness                      =        v.findViewById(R.id.nameOfBusiness);
+        descriptionOfBusiness               =        v.findViewById(R.id.descriptionOfBusiness);
+        phoneDescription                    =        v.findViewById(R.id.phoneDescription);
+        emailOfBusiness                     =        v.findViewById(R.id.emailOfBusiness);
+        adressOfBusiness                    =        v.findViewById(R.id.adressOfBusiness);
 
-//        count.setText("מס׳ אירועים: " + strFuture);
-        futureEvents.setOnClickListener(new View.OnClickListener() {
+        nameOfBusiness.setText(CurrentAccount.getTitle());
+        descriptionOfBusiness.setText(CurrentAccount.getDescription());
+        phoneDescription.setText(CurrentAccount.getContactNumber());
+        emailOfBusiness.setText(CurrentAccount.getSiteURL());
+        //adressOfBusiness.setText(AcountTrans.getAdress());
 
 
+        futureEventsFragTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveToFutureEvents();
             }
         });
-        meetingsTag.setOnClickListener(new View.OnClickListener() {
+        webViewFragTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveToMeetings();
             }
         });
 
-
-        SupportMapFragment mapFragment = new SupportMapFragment();
-
-
+        if (strAdress != null) {
+            SupportMapFragment mapFragment = new SupportMapFragment();
             getFragmentManager().
                     beginTransaction().
                     replace(R.id.mapForFrag, mapFragment).
                     commit();
-
             mapFragment.getMapAsync(this);
-
+        }
         return v;
     }
 
-
     public void moveToFutureEvents(){
         Bundle bundle = new Bundle();
-        bundle.putString("title", strTitle);
-        bundle.putString("link", link);
-        bundle.putString("description", description);
-        bundle.putString("future", strFuture);
-        bundle.putString("nick", nick);
-        bundle.putString("token", token);
-        bundle.putString("mobileNumber", mobileNumber);
+//        bundle.putString("title", strTitle);
+//        bundle.putString("link", link);
+//        bundle.putString("future", strFuture);
+//        bundle.putString("nick", nick);
+        bundle.putParcelable("Account", CurrentAccount);
+//        bundle.putString("token", token);
+//        bundle.putString("mobileNumber", mobileNumber);
         futureEvents fragInfo = new futureEvents();
         fragInfo.setArguments(bundle);
 
@@ -110,23 +111,21 @@ public class description extends Fragment implements OnMapReadyCallback  {
     }
     public void moveToMeetings(){
         Bundle bundle = new Bundle();
-        bundle.putString("title",strTitle);
-        bundle.putString("link",link);
-        bundle.putString("description", description);
-        bundle.putString("nick", nick);
-        bundle.putString("token", token);
-        bundle.putString("future", strFuture);
-        bundle.putString("mobileNumber", mobileNumber);
+//        bundle.putString("title",strTitle);
+//        bundle.putString("link",link);
+//        bundle.putString("nick", nick);
+//        bundle.putString("token", token);
+        bundle.putParcelable("Account", CurrentAccount);
+//        bundle.putString("future", strFuture);
+//        bundle.putString("mobileNumber", mobileNumber);
 
         webViewFrag fragInfo = new webViewFrag();
         fragInfo.setArguments(bundle);
 
         getFragmentManager().
                 beginTransaction().
-                replace(R.id.descriptionContainer, fragInfo.newInstance(link, strTitle, strFuture, nick)).
+                replace(R.id.descriptionContainer, fragInfo.newInstance(CurrentAccount)).
                 commit();
-
-
     }
 
     @Override
@@ -136,8 +135,6 @@ public class description extends Fragment implements OnMapReadyCallback  {
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(address, 15));
 
 }
-
-        //TODO : get the lat lonng in the datasource of description and push it to the map with description.get()
     public LatLng getLocationFromAddress(Context context, String strAddress)
     {
         Geocoder coder= new Geocoder(context);

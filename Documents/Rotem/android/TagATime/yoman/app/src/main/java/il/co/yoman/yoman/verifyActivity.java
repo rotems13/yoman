@@ -27,7 +27,7 @@ import static il.co.yoman.yoman.services.NetworkStateReceiver.isOnlineReciver;
 import static il.co.yoman.yoman.services.NetworkStateReceiver.makeToast;
 import static il.co.yoman.yoman.welcomeScreen.getMobileNumber;
 import static il.co.yoman.yoman.welcomeScreen.getToken;
-import static il.co.yoman.yoman.welcomeScreen.isFragment1Shown;
+import static il.co.yoman.yoman.welcomeScreen.isAccountsShown;
 
 public class verifyActivity extends AppCompatActivity {
     protected static String      verifyToken;
@@ -51,8 +51,6 @@ public class verifyActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);     //  Fixed Portrait orientation
 
-//            loginToken      =   getIntent().getStringExtra("token");
-//            mobileNumber    =   getIntent().getStringExtra("mobileNumber");
             verify          =   findViewById(R.id.btnVerify);
             edVerify        =   findViewById(R.id.edVerifyNumber);
             progressbar     =   findViewById(R.id.progressBar);
@@ -108,7 +106,7 @@ public class verifyActivity extends AppCompatActivity {
         bundle.putString("mobileNumber", getMobileNumber());
         accountsFrag fragInfo = new accountsFrag();
         fragInfo.setArguments(bundle);
-        isFragment1Shown = true;
+        isAccountsShown = true;
         getSupportFragmentManager().
                 beginTransaction().
                 replace(R.id.containerVerifyac, fragInfo).
@@ -129,7 +127,7 @@ public class verifyActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        if (isFragment1Shown){
+        if (isAccountsShown){
             if (drawer.isDrawerVisible(GravityCompat.START))
                 drawer.closeDrawer(GravityCompat.START);
             else {

@@ -21,7 +21,7 @@
         >
 
         <ImageView
-            android:id="@+id/countAccount"
+            android:id="@+id/leftSideLogo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -40,7 +40,7 @@
         >
 
         <TextView
-            android:id="@+id/titleAccount"
+            android:id="@+id/topRightTitleAccount"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="TextView"
@@ -49,10 +49,7 @@
             android:textColor="#ffffff" />
 
     </android.support.percent.PercentRelativeLayout>
-
-
-
-    <!--תפריט - פגישות - webViewTag-->
+    <!--webViewFragTitle-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -62,7 +59,7 @@
         app:layout_marginStartPercent="67%"
         >
         <TextView
-            android:id="@+id/webViewTag"
+            android:id="@+id/webViewFragTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="הזמן תור"
@@ -71,8 +68,7 @@
             android:textColor="#9b9b9b" />
 
     </android.support.percent.PercentRelativeLayout>
-
-    <!--futureEvents-->
+    <!--futureEventsFragTitle-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -82,7 +78,7 @@
         app:layout_marginStartPercent="33%"
         >
         <TextView
-            android:id="@+id/futureEvents"
+            android:id="@+id/futureEventsFragTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="הפגישות שלי"
@@ -91,13 +87,31 @@
             android:textColor="#9b9b9b" />
 
     </android.support.percent.PercentRelativeLayout>
+    <!--descriptionFragTitle -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "6%"
+        app:layout_widthPercent= "33%"
+        app:layout_marginTopPercent= "8%"
+        app:layout_marginStartPercent="0%"
+        >
+        <TextView
+            android:id="@+id/descriptionFragTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="פרטי עסק"
+            android:gravity="center"
+            android:textAlignment="gravity"
+            android:textColor="#9b9b9b" />
 
-    <!--תפריט - Line futureEvents-->
+    </android.support.percent.PercentRelativeLayout>
+    <!--bottom Line  -->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_heightPercent= "0.6%"
-        app:layout_widthPercent= "34%"
+        app:layout_widthPercent= "33%"
         app:layout_marginTopPercent= "14.5%"
         app:layout_marginStartPercent="33%"
         >
@@ -108,30 +122,10 @@
             android:gravity="center"
             android:textAlignment="gravity"
             />
-
     </android.support.percent.PercentRelativeLayout>
 
-    <!--businessDescription -->
-    <android.support.percent.PercentRelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_heightPercent= "6%"
-        app:layout_widthPercent= "33%"
-        app:layout_marginTopPercent= "8%"
-        app:layout_marginStartPercent="0%"
-        >
-        <TextView
-            android:id="@+id/businessDescription"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="פרטי עסק"
-            android:gravity="center"
-            android:textAlignment="gravity"
-            android:textColor="#9b9b9b" />
 
-    </android.support.percent.PercentRelativeLayout>
-
-    <!-- bottom page -->
+                 <!--the page-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -139,10 +133,7 @@
         app:layout_widthPercent= "100%"
         app:layout_marginTopPercent= "15%"
         android:background="#f4f4f4"
-
-
         >
-
 
     </android.support.percent.PercentRelativeLayout>
     <!-- recycle View -->
@@ -152,7 +143,6 @@
         app:layout_heightPercent= "100%"
         app:layout_widthPercent= "100%"
         >
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvEvents"
             android:background="#f4f4f4"
@@ -179,8 +169,6 @@
             android:backgroundTint="#37474f"
             />
     </android.support.percent.PercentRelativeLayout>
-
-
 
     <!--text noneObjects-->
     <android.support.percent.PercentRelativeLayout

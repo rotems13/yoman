@@ -91,7 +91,6 @@
                 />
 
         </android.support.percent.PercentRelativeLayout>
-
         <!--Line-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
@@ -109,7 +108,6 @@
                 android:background="#6aacf9"
                 />
         </android.support.percent.PercentRelativeLayout>
-
         <!--whiteBox-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
@@ -128,7 +126,6 @@
                 android:background="@drawable/whiteboxshadow"
                 />
         </android.support.percent.PercentRelativeLayout>
-
         <!--Title-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
@@ -158,10 +155,8 @@
             </TextView>
             </me.grantland.widget.AutofitLayout>
 
-
-
         </android.support.percent.PercentRelativeLayout>
-        <!--Create-->
+        <!--Reasurce-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -179,7 +174,6 @@
                 android:textColor="#9b9b9b" />
 
         </android.support.percent.PercentRelativeLayout>
-
         <!--status-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
@@ -198,7 +192,6 @@
                 android:text="מאושר"
                 android:textColor="#9e9e9e" />
         </android.support.percent.PercentRelativeLayout>
-
         <!--picStatus-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
@@ -217,19 +210,6 @@
         </android.support.percent.PercentRelativeLayout>
 
     </android.support.percent.PercentRelativeLayout>
-
-
-    <!--<android.support.percent.PercentRelativeLayout-->
-        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="20dp"-->
-        <!--android:layout_marginTop="120dp"-->
-        <!--android:windowSoftInputMode = "stateAlwaysHidden"-->
-        <!--android:background="#f4f4f4"-->
-        <!--tools:context="il.co.yoman.yoman.Account.webViewFrag">-->
-    <!--</android.support.percent.PercentRelativeLayout>-->
 
 
 </android.support.v7.widget.CardView>

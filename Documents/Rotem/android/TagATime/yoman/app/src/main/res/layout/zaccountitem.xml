@@ -20,7 +20,6 @@
         android:background="#f4f4f4"
         tools:context="il.co.yoman.yoman.Account.webViewFrag">
 
-
         <!--whiteBox-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
@@ -44,9 +43,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent= "30%"
-            app:layout_widthPercent= "35%"
+            app:layout_widthPercent= "65%"
             app:layout_marginTopPercent= "35%"
-            app:layout_marginStartPercent="58%"
+            app:layout_marginStartPercent="28%"
             >
             <TextView
                 android:id="@+id/tvTitle"
@@ -76,7 +75,7 @@
                 android:textColor="#9e9e9e" />
         </android.support.percent.PercentRelativeLayout>
 
-        <!--counterFuture-->
+        <!--counterFutureNumber-->
         <android.support.percent.PercentRelativeLayout
             android:layout_width="0dp"
             android:layout_height="0dp"

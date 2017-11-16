@@ -17,67 +17,56 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import il.co.yoman.yoman.DataSource.AccountDataSource;
 import il.co.yoman.yoman.R;
 import il.co.yoman.yoman.accountsFrag;
 
 import static il.co.yoman.yoman.services.NetworkStateReceiver.isOnlineReciver;
-import static il.co.yoman.yoman.welcomeScreen.getMobileNumber;
-import static il.co.yoman.yoman.welcomeScreen.getToken;
+import static il.co.yoman.yoman.welcomeScreen.setIsAccountsShown;
+import static il.co.yoman.yoman.welcomeScreen.setIsWebViewShown;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class webViewFrag extends Fragment {
     private WebView          webView;
-    private TextView         title, count, meetingsTag, bottom_Line, futureEvents, descriptionFrag;
-    private String           strTitle, strFuture, nick, token,mobileNumber;
-    private static String    linkAccount;
+    private TextView         topRightTitleAccount, webViewFragTitle, bottom_Line, futureEventsFragTitle, descriptionFragTitle;
+    private AccountDataSource.Account CurrentAccount;
 
-    public static String getLinkAccount() {
-        return linkAccount;
-    }
-    public  webViewFrag      newInstance(String linkAccount, String title, String future, String nick ) {
+    public  webViewFrag      newInstance(AccountDataSource.Account CurrentAccount ) {
 
         Bundle args = new Bundle();
-        args.putString("link", linkAccount);
-        args.putString("title", title);
-        args.putString("future", future);
-        args.putString("nick", nick);
+        args.putParcelable("Account", CurrentAccount);
 
         webViewFrag fragment = new webViewFrag();
         fragment.setArguments(args);
         return fragment;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setIsAccountsShown(false);
+        setIsWebViewShown(true);
+
         if (container != null) {
             container.removeAllViews();
         }
+        CurrentAccount              =        this.getArguments().getParcelable("Account");
+        View v                      =        inflater.inflate(R.layout.fragment_web_view, container, false);
+        //upper layer
+        webView                     =        v.findViewById(R.id.webView);
+        topRightTitleAccount        =        v.findViewById(R.id.topRightTitleAccount);
+        webViewFragTitle            =        v.findViewById(R.id.webViewFragTitle);
+        futureEventsFragTitle       =        v.findViewById(R.id.futureEventsFragTitle);
+        descriptionFragTitle        =        v.findViewById(R.id.descriptionFragTitle);
+        bottom_Line                 =        v.findViewById(R.id.bottom_line);
 
-
-        linkAccount      =        getArguments().getString("link");
-        strTitle         =        this.getArguments().getString("title");
-        strFuture        =        this.getArguments().getString("future");
-        nick             =        this.getArguments().getString("nick");
-        mobileNumber     =        getMobileNumber();
-        token            =        getToken();
-
-        View v           =        inflater.inflate(R.layout.fragment_web_view, container, false);
-        webView          =        v.findViewById(R.id.webView);
-        title            =        v.findViewById(R.id.titleAccount);
-        futureEvents     =        v.findViewById(R.id.futureEvents);
-        descriptionFrag  =        v.findViewById(R.id.businessDescription);
-        meetingsTag      =        v.findViewById(R.id.webViewTag);
-        bottom_Line      =        v.findViewById(R.id.bottom_Line);
-
-        title.setText(strTitle);
-        meetingsTag.setTextColor(Color.WHITE);
+        topRightTitleAccount.setText(CurrentAccount.getTitle());
+        webViewFragTitle.setTextColor(Color.WHITE);
         bottom_Line.setBackground( getResources().getDrawable(R.drawable.shadow) );
-        futureEvents.setText("פגישות עתידיות " + "(" + strFuture +")");
+        futureEventsFragTitle.setText("פגישות עתידיות " + "(" + CurrentAccount.getFutureEvents() +")");
 
-
+        //webView
         webView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -87,18 +76,19 @@ public class webViewFrag extends Fragment {
                 return false;
             }
         });
-
         config(webView);
-        webView.loadUrl(linkAccount);
-        futureEvents.setOnClickListener(new View.OnClickListener() {
+        webView.loadUrl(CurrentAccount.getSiteURL());
+        futureEventsFragTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setIsWebViewShown(false);
                 moveToFutureEvents();
                 }
             });
-        descriptionFrag.setOnClickListener(new View.OnClickListener() {
+        descriptionFragTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setIsWebViewShown(false);
                 moveToDescription();
             }
         });
@@ -110,8 +100,6 @@ public class webViewFrag extends Fragment {
         settings.setJavaScriptEnabled(true);
 
         webView.setWebViewClient(new WebViewClient(){
-
-            @SuppressWarnings("deprecation")
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 webView.loadUrl(url);
@@ -162,15 +150,7 @@ public class webViewFrag extends Fragment {
     }
     public void moveToFutureEvents(){
         Bundle bundle = new Bundle();
-        bundle.putString("title",strTitle);
-        bundle.putString("token", getToken());
-        bundle.putString("nick", nick);
-        bundle.putString("future", strFuture);
-        bundle.putString("token", token);
-        bundle.putString("mobileNumber", mobileNumber);
-
-        bundle.putString("mobileNumber", getMobileNumber());
-
+        bundle.putParcelable("Account", CurrentAccount);
         futureEvents fragInfo = new futureEvents();
         fragInfo.setArguments(bundle);
 
@@ -179,23 +159,12 @@ public class webViewFrag extends Fragment {
                 replace(R.id.webContainer, fragInfo).
                 commit();
 
-
     }
     public void moveToDescription(){
         Bundle bundle = new Bundle();
-        bundle.putString("title",strTitle);
-        bundle.putString("link",linkAccount);
-        bundle.putString("nick",nick);
-        bundle.putString("token", token);
-        bundle.putString("future", strFuture);
-        bundle.putString("mobileNumber", mobileNumber);
-
+        bundle.putParcelable("Account", CurrentAccount);
         il.co.yoman.yoman.Account.description fragInfo = new description();
         fragInfo.setArguments(bundle);
-
-        getFragmentManager().
-                beginTransaction().
-                replace(R.id.webContainer, fragInfo).
-                commit();
+        getFragmentManager().beginTransaction().replace(R.id.webContainer, fragInfo).commit();
     }
 }
