@@ -168,7 +168,7 @@
             android:id="@+id/nameOfBusiness"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="9pt"
+            android:textSize="11pt"
             android:gravity="right"
             android:text="Asia Medical"
             android:textColor="#9b9b9b" />
@@ -179,9 +179,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentEnd="true"
-        app:layout_heightPercent= "15%"
+        app:layout_heightPercent= "11%"
         app:layout_widthPercent= "90%"
-        app:layout_marginTopPercent= "25%"
+        app:layout_marginTopPercent= "24%"
         app:layout_marginEndPercent="4%"
         android:layout_alignParentRight="true">
         <me.grantland.widget.AutofitLayout
@@ -192,8 +192,10 @@
             android:id="@+id/descriptionOfBusiness"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="8pt"
+            android:textSize="9pt"
             android:gravity="end"
+            android:ellipsize="end"
+            android:maxLines="3"
             android:text="Andy Irons - One on One Training base jumping extreme fit workoutl"
             android:textColor="#4a4a4a"
             >
@@ -209,7 +211,7 @@
         android:layout_height="0dp"
         app:layout_heightPercent= "5%"
         app:layout_widthPercent= "80%"
-        app:layout_marginTopPercent= "35%"
+        app:layout_marginTopPercent= "36%"
         app:layout_marginEndPercent="10%"
         android:layout_alignParentRight="true">
         <TextView
@@ -228,7 +230,7 @@
         android:layout_height="0dp"
         app:layout_heightPercent= "4%"
         app:layout_widthPercent= "4%"
-        app:layout_marginTopPercent= "34.7%"
+        app:layout_marginTopPercent= "35.7%"
         app:layout_marginEndPercent="4%"
         android:layout_alignParentRight="true">
         <ImageView
@@ -324,9 +326,9 @@
         android:id="@+id/mapForFrag"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent="40%"
+        app:layout_heightPercent="45%"
         app:layout_marginStartPercent="0%"
-        app:layout_marginTopPercent="60%"
+        app:layout_marginTopPercent="55%"
         app:layout_widthPercent="100%">
 
 

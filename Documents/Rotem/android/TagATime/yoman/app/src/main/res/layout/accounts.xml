@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/accCotnainer"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layoutDirection="ltr"
+    android:windowSoftInputMode = "stateAlwaysHidden"
+    android:background="#f4f4f4"
+    tools:showIn="@layout/accounts">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layoutDirection="ltr"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="left"
+                android:visibility="invisible"
+                android:src="@drawable/yomanlogo2x"/>
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layoutDirection="ltr"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="left"
+                android:text="יומנים לזימון"
+                android:textSize="24dp"
+                android:gravity="center"
+                />
+
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- recycle View -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "100%"
+        app:layout_widthPercent= "100%"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvAccounts"
+            android:background="#f4f4f4"
+            app:layout_marginTopPercent= "10%"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </android.support.percent.PercentRelativeLayout>
+    <!-- ProgressBar -->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "25%"
+        app:layout_widthPercent= "25%"
+        app:layout_marginEndPercent= "38.5%"
+        app:layout_marginTopPercent= "37.5%"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#37474f"
+            />
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--text noneObjects-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "20%"
+        app:layout_widthPercent= "50%"
+        app:layout_marginTopPercent= "25%"
+        app:layout_marginStartPercent="25%"
+        >
+        <TextView
+            android:id="@+id/noneEvents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="25sp"
+            android:visibility="invisible"
+            android:text="לא קיימים עסקים רשומים"
+            android:gravity="center"
+            android:textColor="#cccccc" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+</android.support.percent.PercentRelativeLayout>

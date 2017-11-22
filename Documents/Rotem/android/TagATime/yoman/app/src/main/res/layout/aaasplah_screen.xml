@@ -23,7 +23,7 @@
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/logo"
+            android:src="@drawable/yoman3x"
             />
     </android.support.percent.PercentRelativeLayout>
 
@@ -34,14 +34,14 @@
         app:layout_heightPercent= "7%"
         app:layout_widthPercent= "80%"
         app:layout_marginTopPercent= "23%"
-        app:layout_marginStartPercent="15%"
+        app:layout_marginStartPercent="10%"
         >
         <TextView
             android:id="@+id/text"
             android:textSize="17sp"
             android:gravity="center"
-            android:text="יומן - זימון תורים "
-            android:textColor="#9b9b9b"
+            android:text="יומן - זימון תורים, פגישות ואירועים"
+            android:textColor="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 

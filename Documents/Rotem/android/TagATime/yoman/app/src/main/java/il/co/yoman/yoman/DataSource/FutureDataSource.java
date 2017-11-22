@@ -111,17 +111,26 @@ public class FutureDataSource  {
                 Collections.sort(EventsFuture, new Comparator<FutureEvent>(){
                     @Override
                     public int compare(FutureEvent t1, FutureEvent t2) {
-                       if (t1.getYear() > t2.getYear())
+                       if (t1.getYear()> t2.getYear())
                            return 1;
-                       else if (t1.getYear() == t2.getYear())
+                       else if (t1.getYear() == t2.getYear()) {
                            if (t1.getMonth() > t2.getMonth())
-                               return 1; else return  -1;
-                       else if (t1.getMonth() == t2.getMonth())
+                               return 1;
+                           else if (t1.getMonth() < t2.getMonth())
+                               return -1;
+                       }
+                       if (t1.getMonth() == t2.getMonth()&& (t1.getYear() == t2.getYear())) {
                            if (t1.getDay() > t2.getDay())
-                               return 1; else return  -1;
-                       else if (t1.getDay() == t2.getDay())
-                           if (t1.getHour()*60 + t1.getMinute() > t2.getHour()*60 +t2.getMinute())
-                               return 1; else return  -1;
+                               return 1;
+                           else if (t1.getDay() < t2.getDay())
+                               return -1;
+                       }
+                       if (t1.getDay() == t2.getDay() && t1.getMonth() == t2.getMonth()&& (t1.getYear() == t2.getYear())) {
+                           if (t1.getHour() * 60 + t1.getMinute() > t2.getHour() * 60 + t2.getMinute())
+                               return 1;
+                           else if (t1.getHour() * 60 + t1.getMinute() < t2.getHour() * 60 + t2.getMinute())
+                               return -1;
+                       }
 
                         return 0;
                     }

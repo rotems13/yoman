@@ -31,6 +31,7 @@ import il.co.yoman.yoman.Account.webViewFrag;
 import il.co.yoman.yoman.DataSource.AccountDataSource;
 
 import static il.co.yoman.yoman.welcomeScreen.getToken;
+import static il.co.yoman.yoman.welcomeScreen.isAccountsShown;
 import static il.co.yoman.yoman.welcomeScreen.token;
 
 
@@ -41,17 +42,18 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
         NavigationView.OnNavigationItemSelectedListener{
     private RecyclerView             accounts;
     private ProgressBar              progressBar;
-    private TextView                 logout, manager, conatct, noneEvents ;
+    private TextView                 noneEvents ;
     private SharedPreferences        prefs ;
-    protected static DrawerLayout             drawer;
+    protected static DrawerLayout    drawer;
     private NavigationView           navigationView;
     private ActionBarDrawerToggle    toogle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        isAccountsShown = true;
 
-        View v                             =    inflater.inflate(R.layout.fragment_accounts, container, false);
+        View v                             =    inflater.inflate(R.layout.navigationview, container, false);
         Toolbar toolbar                    =    v.findViewById(R.id.toolbar);
         accounts                           =    v.findViewById(R.id.rvAccounts);
         progressBar                        =    v.findViewById(R.id.progressBar);
@@ -59,6 +61,7 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
 
         drawer                             =    v.findViewById(R.id.drawer_layout);
         navigationView                     =    v.findViewById(R.id.nav_view);
+
         toogle = new ActionBarDrawerToggle(this.getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toogle);
         toogle.syncState();
@@ -66,7 +69,6 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
         AccountDataSource.getAccounts(this, getToken());
         return v;
     }
-
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -77,18 +79,20 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
             logOut();
         }
          else if (id == R.id.contactusMenu){
-
-        }
+            isAccountsShown= false;
+                    getActivity().getSupportFragmentManager().
+                            beginTransaction().
+                            replace(R.id.accCotnainer, new ContactUs()).
+                            commit();
+                }
          else if (id == R.id.signAsManagerMenu) {
 
         }
 
         DrawerLayout drawer = getView().findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
         return true;
     }
-
     @Override
     public void onAccountsArrived(List<AccountDataSource.Account> businessAccount) {
         progressBar.setVisibility(View.GONE);
@@ -153,6 +157,7 @@ public class accountsFrag extends Fragment implements AccountDataSource.OnAccoun
             @Override
             public void onClick(View view) {
                 int position = getAdapterPosition();
+                isAccountsShown = false;
 
                 String nick = data.get(position).getNick();
                 String title = data.get(position).getTitle();

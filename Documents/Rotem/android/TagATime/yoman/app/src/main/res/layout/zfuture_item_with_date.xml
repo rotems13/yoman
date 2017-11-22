@@ -183,14 +183,24 @@
             app:layout_marginTopPercent= "26%"
             app:layout_marginStartPercent="80%"
             >
+            <me.grantland.widget.AutofitLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
             <TextView
                 android:id="@+id/status"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="6pt"
                 android:gravity="right"
+                android:ellipsize="end"
+                android:autoSizeTextType="uniform"
+                android:maxLines="2"
                 android:text="מאושר"
-                android:textColor="#9e9e9e" />
+                android:textColor="#9e9e9e" >
+
+            </TextView>
+            </me.grantland.widget.AutofitLayout>
         </android.support.percent.PercentRelativeLayout>
         <!--picStatus-->
         <android.support.percent.PercentRelativeLayout

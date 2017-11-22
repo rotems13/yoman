@@ -67,7 +67,6 @@ public class fullWebView extends Fragment {
             webView.loadUrl(link);
             return v;
     }
-
     private void config(final WebView webView) {
         //Enable JavaScript
         WebSettings settings = webView.getSettings();

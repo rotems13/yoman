@@ -19,7 +19,7 @@ public class splahScreen extends AppCompatActivity {
         if (getSupportActionBar() != null) { //hide action bar
             getSupportActionBar().hide();
         }
-        setContentView(R.layout.aactivity_splah_screen);
+        setContentView(R.layout.aaasplah_screen);
 
         Thread thread = new Thread() {
 

@@ -53,7 +53,7 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
         bottom_Line                 =        v.findViewById(R.id.bottom_line);
 
         topRightTitleAccount.setText(CurrentAccount.getTitle());
-        webViewFragTitle.setTextColor(Color.WHITE);
+        futureEventsFragTitle.setTextColor(Color.WHITE);
         bottom_Line.setBackground( getResources().getDrawable(R.drawable.shadow) );
         futureEventsFragTitle.setText("פגישות עתידיות " + "(" + CurrentAccount.getFutureEvents() +")");
 

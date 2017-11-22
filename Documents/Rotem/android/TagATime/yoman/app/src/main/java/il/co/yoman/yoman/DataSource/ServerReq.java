@@ -27,26 +27,19 @@ public class ServerReq {
 
     private ArrayList<NameValuePair> params;
     private ArrayList <NameValuePair> headers;
-
     private String url;
-
     private int responseCode;
     private String message;
-
     private String response;
-
     public String getResponse() {
         return response;
     }
-
     public String getErrorMessage() {
         return message;
     }
-
     public int getResponseCode() {
         return responseCode;
     }
-
     public ServerReq(String url)
     {
         this.url = url;
@@ -58,7 +51,6 @@ public class ServerReq {
     {
         params.add(new BasicNameValuePair(name, value));
     }
-
     public void AddHeader(String name, String value)
     {
         headers.add(new BasicNameValuePair(name, value));
@@ -68,7 +60,6 @@ public class ServerReq {
         GET,
         POST
     }
-
     public void Execute(RequestMethod method) throws Exception
     {
         switch(method) {
@@ -115,7 +106,7 @@ public class ServerReq {
 
                 if(!params.isEmpty()){
 
-                    request.setEntity(new UrlEncodedFormEntity(params));
+                    request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
                 }
 
                 executeRequest(request);
@@ -134,7 +125,7 @@ public class ServerReq {
             responseCode = httpResponse.getStatusLine().getStatusCode();
             message = httpResponse.getStatusLine().getReasonPhrase();
 
-            HttpEntity entity = httpResponse.getEntity();
+             HttpEntity entity = httpResponse.getEntity();
 
             if (entity != null) {
 
@@ -142,6 +133,7 @@ public class ServerReq {
                 response = convertStreamToString(instream);
 
                 // Closing the input stream will trigger connection release
+
                 instream.close();
             }
 
@@ -150,6 +142,8 @@ public class ServerReq {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        params.clear();
+        headers.clear();
     }
 
     private static String convertStreamToString(InputStream is) {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#f44359"
+    android:background="@drawable/gradientcolor"
     android:layoutDirection="ltr"
     android:id="@+id/welcomeContainer"
     tools:context="il.co.yoman.yoman.welcomeScreen">
@@ -26,7 +26,6 @@
             android:src="@drawable/yoman3x"
             />
     </android.support.percent.PercentRelativeLayout>
-
     <!--text part 1-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
@@ -46,7 +45,6 @@
             android:layout_height="match_parent"
             />
     </android.support.percent.PercentRelativeLayout>
-
     <!--text part 2 -->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
@@ -67,12 +65,11 @@
             />
 
     </android.support.percent.PercentRelativeLayout>
-
     <!--pic-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent= "61%"
+        app:layout_heightPercent= "50%"
         app:layout_widthPercent= "90%"
         app:layout_marginTopPercent= "36%"
         app:layout_marginStartPercent="5%"
@@ -86,25 +83,26 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
     </android.support.percent.PercentRelativeLayout>
+
     <!--continue button-->
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent= "8%"
-        app:layout_widthPercent= "25%"
-        app:layout_marginTopPercent= "90%"
-        app:layout_marginStartPercent="1%"
+        app:layout_heightPercent="8%"
+        app:layout_widthPercent="70%"
+        app:layout_marginStartPercent="15%"
+        app:layout_marginTopPercent="90%"
         >
 
         <TextView
             android:id="@+id/continue1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="המשך"
-            android:textColor="#ffffff"
+            android:background="@drawable/whitebox"
             android:gravity="center"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:text="היכנס ליומן"
+            android:textColor="#37474f"
+            android:textSize="25sp" />
     </android.support.percent.PercentRelativeLayout>
 
 </android.support.percent.PercentRelativeLayout>

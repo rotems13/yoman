@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -31,10 +32,12 @@ import il.co.yoman.yoman.accountsFrag;
  * A simple {@link Fragment} subclass.
  */
 public class description extends Fragment implements OnMapReadyCallback  {
-    private TextView     topRightTitleAccount, webViewFragTitle, futureEventsFragTitle, descriptionFragTitle, bottom_line,
-            phoneDescription, descriptionOfBusiness, nameOfBusiness,emailOfBusiness, adressOfBusiness;
-    private String       strAdress;
-    private AccountDataSource.Account CurrentAccount;
+    private TextView                   topRightTitleAccount, webViewFragTitle, futureEventsFragTitle, descriptionFragTitle, bottom_line,
+                                       phoneDescription, descriptionOfBusiness, nameOfBusiness,emailOfBusiness, adressOfBusiness;
+    private String                     strAdress;
+    private AccountDataSource.Account  CurrentAccount;
+    private GoogleMap                  mMap;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +68,9 @@ public class description extends Fragment implements OnMapReadyCallback  {
         descriptionOfBusiness.setText(CurrentAccount.getDescription());
         phoneDescription.setText(CurrentAccount.getContactNumber());
         emailOfBusiness.setText(CurrentAccount.getSiteURL());
-        //adressOfBusiness.setText(AcountTrans.getAdress());
+        strAdress = "המלאכה 37 נתניה";
+        descriptionOfBusiness.setText("jjjjkjhvjkhvjhvbm,nvbm,nvbkjhvj,hbv,hjv,mnv ,mhvbjhlbvyughjjjjjjjhhhhhjklhkljhkjhjkhkjgk;jgkjgkk;jk;jkkjgkk;jkljgljhgjhjslkad;gjnfasd;lkgnsal;kdgjnsl;dkgjals'dkfgjas'dlkgjdsal'kgjsd';lkgjasl'kdgjs'l;kdgn'dl;gknasdkl;gnasdlg'l'dfkagn");
+//        strAdress = CurrentAccount.getContactAddress();
 
 
         futureEventsFragTitle.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +85,8 @@ public class description extends Fragment implements OnMapReadyCallback  {
                 moveToMeetings();
             }
         });
-
-        if (strAdress != null) {
+        if (strAdress != null && !strAdress.isEmpty()) {
+            adressOfBusiness.setText(strAdress);
             SupportMapFragment mapFragment = new SupportMapFragment();
             getFragmentManager().
                     beginTransaction().
@@ -94,13 +99,7 @@ public class description extends Fragment implements OnMapReadyCallback  {
 
     public void moveToFutureEvents(){
         Bundle bundle = new Bundle();
-//        bundle.putString("title", strTitle);
-//        bundle.putString("link", link);
-//        bundle.putString("future", strFuture);
-//        bundle.putString("nick", nick);
         bundle.putParcelable("Account", CurrentAccount);
-//        bundle.putString("token", token);
-//        bundle.putString("mobileNumber", mobileNumber);
         futureEvents fragInfo = new futureEvents();
         fragInfo.setArguments(bundle);
 
@@ -111,14 +110,7 @@ public class description extends Fragment implements OnMapReadyCallback  {
     }
     public void moveToMeetings(){
         Bundle bundle = new Bundle();
-//        bundle.putString("title",strTitle);
-//        bundle.putString("link",link);
-//        bundle.putString("nick", nick);
-//        bundle.putString("token", token);
         bundle.putParcelable("Account", CurrentAccount);
-//        bundle.putString("future", strFuture);
-//        bundle.putString("mobileNumber", mobileNumber);
-
         webViewFrag fragInfo = new webViewFrag();
         fragInfo.setArguments(bundle);
 
@@ -129,12 +121,22 @@ public class description extends Fragment implements OnMapReadyCallback  {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-            LatLng address = getLocationFromAddress(getContext(), "hamelaha 15 natanya");
-            googleMap.addMarker(new MarkerOptions().position(address).title("Tag a Time"));
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(address, 15));
+    public void onMapReady(GoogleMap map) {
+        mMap = map;
+        LatLng address = getLocationFromAddress(getContext(), strAdress);
+        map.addMarker(new MarkerOptions().position(address).title(CurrentAccount.getTitle()));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(address, 15));
 
-}
+        UiSettings ui = map.getUiSettings();
+        ui.setMapToolbarEnabled(true);
+        ui.setMyLocationButtonEnabled(true);
+        ui.setCompassEnabled(true);
+        ui.setZoomControlsEnabled(true);
+
+
+
+
+    }
     public LatLng getLocationFromAddress(Context context, String strAddress)
     {
         Geocoder coder= new Geocoder(context);

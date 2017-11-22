@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -45,14 +45,14 @@
                 <action
                     android:name="android.intent.action.MAIN"
                     android:screenOrientation="portrait" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".loginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".verifyActivity" />
+        <activity android:name=".verifyActivity"
+            />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -64,8 +64,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <activity android:name=".welcomeScreen"
 
-        <activity android:name=".welcomeScreen" />
+            />
     </application>
 
 </manifest>

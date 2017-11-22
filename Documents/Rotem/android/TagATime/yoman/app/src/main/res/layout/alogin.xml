@@ -41,7 +41,7 @@
             android:id="@+id/textView0"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="יומן - זימון תורים "
+            android:text="יומן - זימון תורים, פגישות ואירועים"
             android:gravity="center"
             android:textSize="17sp"
             android:textColor="#9b9b9b"
@@ -128,7 +128,7 @@
             app:layout_marginTopPercent="38%"
             >
             <TextView
-                android:id="@+id/contact"
+                android:id="@+id/contactUsLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="צור קשר"

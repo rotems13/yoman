@@ -1,0 +1,73 @@
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:windowSoftInputMode = "stateAlwaysHidden"
+    android:id="@+id/descriptionContainer"
+
+    tools:context="il.co.yoman.yoman.Account.webViewFrag">
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#37474f"
+        android:gravity="left"
+        app:layout_heightPercent= "9%"
+        app:layout_widthPercent= "100%"
+        >
+        <!--לוגו קצה שמאל תורים עתידיים שמאל -->
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent= "100%"
+            app:layout_widthPercent= "25%"
+            app:layout_marginTopPercent= "1%"
+            app:layout_marginStartPercent="2%"
+            >
+
+            <ImageView
+                android:id="@+id/leftSideLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:src="@drawable/yomanlogo2x"
+                android:textColor="#ffffff" />
+
+        </android.support.percent.PercentRelativeLayout>
+        <!--טקסט כותרת קצה ימין-->
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent= "100%"
+            app:layout_widthPercent= "45%"
+            app:layout_marginTopPercent= "29%"
+            app:layout_marginStartPercent="50%"
+            >
+
+            <TextView
+                android:id="@+id/topRightTitleAccount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="צרו איתנו קשר"
+                android:textSize="18dp"
+                android:gravity="right"
+                android:textColor="#ffffff" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <include
+        layout="@layout/formcheck"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent= "92%"
+        app:layout_marginTopPercent= "8%"
+        app:layout_widthPercent= "100%"
+
+        />
+</android.support.percent.PercentRelativeLayout>
