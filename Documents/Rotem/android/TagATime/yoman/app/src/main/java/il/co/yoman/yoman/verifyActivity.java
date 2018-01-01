@@ -62,7 +62,7 @@ public class verifyActivity extends AppCompatActivity {
         counter                 = findViewById(R.id.counter);
 
 
-        progressbar.setVisibility(View.INVISIBLE);
+//        progressbar.setVisibility(View.INVISIBLE);
         counter.setPaintFlags(counter.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         setCounter(counter);
 

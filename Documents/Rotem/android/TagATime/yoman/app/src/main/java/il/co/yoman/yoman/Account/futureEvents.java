@@ -126,7 +126,7 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
         @Override
         public int getItemViewType(int position) {
             String date = this.data.get(position).getDate();
-            if (position >0) {
+            if (position > 0) {
                 String lastDate = this.data.get(position-1).getDate();
                 if (date.equals(lastDate))
                     return 0;
@@ -155,6 +155,7 @@ public class futureEvents extends Fragment  implements FutureDataSource.OnFuture
             holder.tvStartTime.setText(event.getStartTime());
             holder.tvStartTime.setTextColor(Color.parseColor(event.geteColor()));
             holder.line.setBackgroundColor(Color.parseColor(event.geteColor()));
+            if (getItemViewType(position) == 2)
             holder.Date.setText(event.getDate() );
             holder.tvStatus.setText(event.getStatus());
             holder.create.setText(event.getResource());

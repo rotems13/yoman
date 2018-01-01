@@ -6,7 +6,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView1"
         android:textColor="#37474f"
-        android:padding="10dp"
+    android:fontFamily="@font/rubik"
+    android:padding="10dp"
         android:textSize="18dp"
 
 

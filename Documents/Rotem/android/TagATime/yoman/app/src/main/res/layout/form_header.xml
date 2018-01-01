@@ -53,6 +53,7 @@
                 android:layout_height="match_parent"
                 android:text="צרו איתנו קשר"
                 android:textSize="18dp"
+                android:fontFamily="@font/rubik"
                 android:gravity="right"
                 android:textColor="#ffffff" />
 

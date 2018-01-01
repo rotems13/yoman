@@ -41,6 +41,7 @@
             android:id="@+id/textView0"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/rubik"
             android:text="יומן - זימון תורים, פגישות ואירועים"
             android:gravity="center"
             android:textSize="17sp"
@@ -75,6 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="מספר טלפון"
+                android:fontFamily="@font/rubik"
+
                 android:textColor="#9b9b9b"
                 android:textSize="18sp" />
         </android.support.percent.PercentRelativeLayout>
@@ -131,7 +134,8 @@
                 android:id="@+id/contactUsLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="צור קשר"
+                android:fontFamily="@font/rubik"
+                android:text="צריך עזרה? צור איתנו קשר"
                 android:gravity="center"
                 android:textColor="#9b9b9b"
                 android:textSize="16sp" />

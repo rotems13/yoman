@@ -24,6 +24,7 @@
             android:layout_height="match_parent"
             android:paddingTop="8dp"
             android:text="שם מלא"
+            android:fontFamily="@font/rubik"
             android:textColor="#9b9b9b"
             android:textSize="15sp"
             />
@@ -43,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="מספר טלפון לחזרה"
+        android:fontFamily="@font/rubik"
         android:layout_marginTop="20dp"
         android:textColor="#9b9b9b"
         android:textSize="15sp" />
@@ -66,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="נושא הפנייה"
+        android:fontFamily="@font/rubik"
         android:textColor="#9b9b9b"
         android:layout_marginTop="20dp"
         android:textSize="15sp" />
@@ -93,6 +96,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:text="תוכן הפנייה"
+        android:fontFamily="@font/rubik"
         android:textColor="#9b9b9b"
         android:textSize="15sp" />
     <!--Content-->

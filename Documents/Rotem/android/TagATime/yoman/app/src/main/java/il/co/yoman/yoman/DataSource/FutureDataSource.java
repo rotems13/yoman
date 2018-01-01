@@ -1,6 +1,8 @@
 package il.co.yoman.yoman.DataSource;
 
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -42,6 +43,7 @@ public class FutureDataSource  {
                 int responseCode = client.getResponseCode();
                 if (responseCode == 200) {
                     String response = client.getResponse();
+
                     try {
                         List<FutureEvent> EventsFuture = getData(response);
                         return EventsFuture;
@@ -68,73 +70,80 @@ public class FutureDataSource  {
                 JSONArray data = root.getJSONArray("data");
 
          for (int i = 0; i < data.length(); i++) {
-                    JSONObject c = data.getJSONObject(i);
+             JSONObject c = data.getJSONObject(i);
 
 
-                    String st  = c.getString("dt");
-                    char[] myCharArray = st.toCharArray();
-                    String startTime="";
-                    for (int j = 11 ; j<16 ; j++){
-                    startTime += myCharArray[j];
-                    }
-                    String time[] = startTime.split(":");
-                    int hour = Integer.parseInt(time[0]);
-                    int minute = Integer.parseInt(time[1]);
+             String st = c.getString("dt");
+             char[] myCharArray = st.toCharArray();
+             String startTime = "";
+             for (int j = 11; j < 16; j++) {
+                 startTime += myCharArray[j];
+             }
+             String time[] = startTime.split(":");
+             int hour = Integer.parseInt(time[0]);
+             int minute = Integer.parseInt(time[1]);
 
-                    String date = "";
-                    for (int z = 0 ; z<10 ; z ++) {
-                        date += myCharArray[z];
-                    }
-                    String splitDate[] = date.split("-");
-                    int Year = Integer.parseInt(splitDate[0]);
-                    int month = Integer.parseInt(splitDate[1])-1;
-                    int day = Integer.parseInt(splitDate[2]);
+             String date = "";
+             for (int z = 0; z < 10; z++) {
+                 date += myCharArray[z];
+             }
+             String splitDate[] = date.split("-");
+             int Year = Integer.parseInt(splitDate[0]);
+             int month = Integer.parseInt(splitDate[1]) - 1;
+             int day = Integer.parseInt(splitDate[2]);
 
-                    Calendar cal = Calendar.getInstance();
-                    cal.set(Calendar.YEAR, Year);
-                    cal.set(Calendar.DAY_OF_MONTH, day);
-                    cal.set(Calendar.MONTH, month);
+             Calendar cal = Calendar.getInstance();
+             cal.set(Calendar.YEAR, Year);
+             cal.set(Calendar.DAY_OF_MONTH, day);
+             cal.set(Calendar.MONTH, month);
 
 
-                    String FullDate = new SimpleDateFormat("EEEE, d MMMM , yyyy").format(cal.getTime());
 
-                    String resource = c.getString("resource");
-                    String services = c.getString("services");
-                    String status = c.getString("eStatus");
-                    String eColor = c.getString("eColor");
-                    String eStatusColor = c.getString("eStatusColor");
-                    String Url = c.getString("eURL");
+             cal.set(Year,month,day,hour,minute);
 
-                    FutureEvent Event = new FutureEvent(startTime,resource, services,status,eColor,eStatusColor,Url, FullDate, Year, month,day,hour,minute);
-                    EventsFuture.add(Event);
-                }
-                Collections.sort(EventsFuture, new Comparator<FutureEvent>(){
-                    @Override
-                    public int compare(FutureEvent t1, FutureEvent t2) {
-                       if (t1.getYear()> t2.getYear())
-                           return 1;
-                       else if (t1.getYear() == t2.getYear()) {
-                           if (t1.getMonth() > t2.getMonth())
-                               return 1;
-                           else if (t1.getMonth() < t2.getMonth())
-                               return -1;
-                       }
-                       if (t1.getMonth() == t2.getMonth()&& (t1.getYear() == t2.getYear())) {
-                           if (t1.getDay() > t2.getDay())
-                               return 1;
-                           else if (t1.getDay() < t2.getDay())
-                               return -1;
-                       }
-                       if (t1.getDay() == t2.getDay() && t1.getMonth() == t2.getMonth()&& (t1.getYear() == t2.getYear())) {
-                           if (t1.getHour() * 60 + t1.getMinute() > t2.getHour() * 60 + t2.getMinute())
-                               return 1;
-                           else if (t1.getHour() * 60 + t1.getMinute() < t2.getHour() * 60 + t2.getMinute())
-                               return -1;
-                       }
 
-                        return 0;
-                    }
-                });
+             String FullDate = new SimpleDateFormat("EEEE, d MMMM , yyyy").format(cal.getTime());
+
+             String resource = c.getString("resource");
+             String services = c.getString("services");
+             String status = c.getString("eStatus");
+             String eColor = c.getString("eColor");
+             String eStatusColor = c.getString("eStatusColor");
+             String Url = c.getString("eURL");
+
+             Log.d(cal.toString(), "calander");
+             FutureEvent Event = new FutureEvent(startTime, resource, services, status, eColor, eStatusColor, Url, FullDate, Year, month, day, hour, minute, cal);
+             EventsFuture.add(Event);
+         }
+                Collections.sort(EventsFuture);
+
+//                Collections.sort(EventsFuture, new Comparator<FutureEvent>(){
+//                    @Override
+//                    public int compare(FutureEvent t1, FutureEvent t2) {
+//                       if (t1.getYear()> t2.getYear())
+//                           return 1;
+//                       else if (t1.getYear() == t2.getYear()) {
+//                           if (t1.getMonth() > t2.getMonth())
+//                               return 1;
+//                           else if (t1.getMonth() < t2.getMonth())
+//                               return -1;
+//                       }
+//                       if (t1.getMonth() == t2.getMonth()&& (t1.getYear() == t2.getYear())) {
+//                           if (t1.getDay() > t2.getDay())
+//                               return 1;
+//                           else if (t1.getDay() < t2.getDay())
+//                               return -1;
+//                       }
+//                       if (t1.getDay() == t2.getDay() && t1.getMonth() == t2.getMonth()&& (t1.getYear() == t2.getYear())) {
+//                           if (t1.getHour() * 60 + t1.getMinute() > t2.getHour() * 60 + t2.getMinute())
+//                               return 1;
+//                           else if (t1.getHour() * 60 + t1.getMinute() < t2.getHour() * 60 + t2.getMinute())
+//                               return -1;
+//                       }
+//
+//                        return 0;
+//                    }
+//                });
 
                 return EventsFuture;
 
@@ -148,7 +157,7 @@ public class FutureDataSource  {
         }.execute();
     }
 
-    public static class FutureEvent{// implements Comparable {
+    public static class FutureEvent implements Comparable<FutureEvent>{// implements Comparable {
         private String startTime;
         private String resource;
         private String services;
@@ -156,9 +165,13 @@ public class FutureDataSource  {
         private String eStatusColor;
         private String date;
         private String Url;
+
+
+
+        private Calendar cal;
         private int year, month, day, hour, minute;
 
-        public FutureEvent(String startTime, String resource, String services, String status, String eColor, String eStatusColor,String url, String date, int year, int month, int day, int hour, int minute) {
+        public FutureEvent(String startTime, String resource, String services, String status, String eColor, String eStatusColor, String url, String date, int year, int month, int day, int hour, int minute, Calendar cal) {
             this.startTime = startTime;
             this.resource = resource;
             this.services = services;
@@ -171,9 +184,15 @@ public class FutureDataSource  {
             this.month = month;
             this.day = day;
             this.hour = hour;
+            this.cal = cal;
             this.minute = minute;
         }
-
+        public Calendar getCal() {
+            return cal;
+        }
+        public void setCal(Calendar cal) {
+            this.cal = cal;
+        }
         public String getStartTime() {
             return startTime;
         }
@@ -267,6 +286,11 @@ public class FutureDataSource  {
         }
         public void setMinute(int minute) {
             this.minute = minute;
+        }
+
+        @Override
+        public int compareTo(@NonNull FutureEvent futureEvent) {
+            return getCal().compareTo(futureEvent.getCal());
         }
 
 

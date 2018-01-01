@@ -40,6 +40,7 @@
             android:id="@+id/text"
             android:textSize="17sp"
             android:gravity="center"
+            android:fontFamily="@font/rubik"
             android:text="יומן - זימון תורים, פגישות ואירועים"
             android:textColor="#ffffff"
             android:layout_width="match_parent"

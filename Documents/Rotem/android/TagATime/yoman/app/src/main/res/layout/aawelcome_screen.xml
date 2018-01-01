@@ -41,6 +41,7 @@
             android:gravity="center"
             android:text="אפליקציה לניהול יומן,"
             android:textColor="#ffffff"
+            android:fontFamily="@font/rubik"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
@@ -59,6 +60,7 @@
             android:textSize="19sp"
             android:gravity="center"
             android:text="זימון תורים, פגישות ואירועים. "
+            android:fontFamily="@font/rubik"
             android:textColor="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -100,6 +102,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/whitebox"
             android:gravity="center"
+            android:fontFamily="@font/rubik"
             android:text="היכנס ליומן"
             android:textColor="#37474f"
             android:textSize="25sp" />

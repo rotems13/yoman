@@ -52,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="12pt"
+                android:fontFamily="@font/rubik"
                 android:text="כותרת"
                 android:textColor="#000000" />
 
@@ -71,6 +72,7 @@
                 android:layout_height="match_parent"
                 android:textSize="6pt"
                 android:gravity="center"
+                android:fontFamily="@font/rubik"
                 android:text="עתידיים"
                 android:textColor="#9e9e9e" />
         </android.support.percent.PercentRelativeLayout>
@@ -90,6 +92,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="20pt"
+                android:fontFamily="@font/rubik"
                 android:text="10"
                 android:textColor="#9e9e9e" />
         </android.support.percent.PercentRelativeLayout>

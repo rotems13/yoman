@@ -23,7 +23,7 @@ public class AccountDataSource {
     }
 
     public static void getAccounts(final OnAccountArrivedListener listener, final String tkn) {
-        final String AccountsUrl = "http://mdev1.yoman.co.il/api/Client/GetMySites";
+        final String AccountsUrl = "https://mdev1.yoman.co.il/api/Client/GetMySites";
         final ServerReq client = new ServerReq(AccountsUrl);
         new AsyncTask<Void, Void, List<Account>>() {
 
